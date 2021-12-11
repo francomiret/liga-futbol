@@ -4,8 +4,7 @@ import { ClubesComponent } from './clubes/clubes.component';
 import { TorneoComponent } from './torneo/torneo.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'torneo' },
-  { path: 'torneo', component: TorneoComponent },
+  { path: '', component: TorneoComponent },
   { path: 'clubes', component: ClubesComponent },
 ];
 
