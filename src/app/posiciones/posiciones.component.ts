@@ -13,10 +13,10 @@ export class PosicionesComponent {
     'g',
     'e',
     'p',
+    'puntos',
     'gf',
     'gc',
     'dg',
-    'puntos',
   ];
   dataSource = ELEMENT_DATA;
 }
@@ -38,7 +38,7 @@ export interface PositionsElements {
 const ELEMENT_DATA: PositionsElements[] = [
   {
     position: 1,
-    club: 'Club Deportivo Bar',
+    club: 'Club Deportivo Barú',
     puntos: 39,
     pj: 13,
     gf: 10,

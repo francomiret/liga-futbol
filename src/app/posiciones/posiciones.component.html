@@ -26,9 +26,11 @@
     </ng-container>
 
     <ng-container matColumnDef="puntos">
-      <th class="element" mat-header-cell *matHeaderCellDef>Pts.</th>
+      <th class="element" mat-header-cell *matHeaderCellDef> <strong>Pts.</strong></th>
       <td class="element" mat-cell *matCellDef="let element">
-        {{ element.puntos }}
+        <strong>
+          {{ element.puntos }}
+        </strong>
       </td>
     </ng-container>
 
