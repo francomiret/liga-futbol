@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { TorneoModule } from './torneo/torneo.module';
 import { ClubesModule } from './clubes/clubes.module';
+import { StoreModule } from '@ngrx/store';
 
 const matModules = [
   MatToolbarModule,
@@ -27,6 +28,7 @@ const matModules = [
     TorneoModule,
     ClubesModule,
     matModules,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent],
