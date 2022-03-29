@@ -8,15 +8,20 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import { TorneoModule } from './torneo/torneo.module';
-import { ClubesModule } from './clubes/clubes.module';
 import { StoreModule } from '@ngrx/store';
+import { ClubModule } from './club/club.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { PosicionesModule } from './posiciones/posiciones.component';
+import { FixtureModule } from './fixture/fixture.component';
+import { GoleadoresModule } from './goleadores/goleadores.component';
+import { TarjetasModule } from './tarjetas/tarjetas.component';
 
 const matModules = [
   MatToolbarModule,
   MatIconModule,
   MatButtonModule,
   MatDividerModule,
+  MatTabsModule,
 ];
 
 @NgModule({
@@ -25,10 +30,13 @@ const matModules = [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    TorneoModule,
-    ClubesModule,
+    PosicionesModule,
+    ClubModule,
+    FixtureModule,
+    GoleadoresModule,
+    TarjetasModule,
     matModules,
-    StoreModule.forRoot({}, {}),
+    // StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent],

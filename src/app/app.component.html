@@ -1,23 +1,25 @@
-<!-- Toolbar -->
-<mat-toolbar>
-  <span>LIGA DE FUTBOL</span>
-  <span class="example-spacer"></span>
-  <button mat-button routerLink="/clubes">Clubes</button>
-  <button mat-button routerLink="/">Torneo</button>
-  <button
-    mat-icon-button
-    class="example-icon favorite-icon"
-    aria-label="Example icon-button with heart icon"
-  >
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with share icon"
-  >
-    <mat-icon>share</mat-icon>
-  </button>
-</mat-toolbar>
+  <mat-toolbar>La liga de las colonias </mat-toolbar>
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab>
+      <ng-template mat-tab-label> FIXTURE </ng-template>
+      <app-fixture></app-fixture>
+    </mat-tab>
 
-<router-outlet></router-outlet>
+    <mat-tab>
+      <ng-template mat-tab-label> POSICIONES </ng-template>
+      <ng-container>
+        <app-posiciones></app-posiciones>
+      </ng-container>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label> GOLEADORES </ng-template>
+      <app-goleadores></app-goleadores>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label> TARJETAS </ng-template>
+      <app-tarjetas></app-tarjetas>
+    </mat-tab>
+  </mat-tab-group>
+  <!-- <router-outlet></router-outlet> -->

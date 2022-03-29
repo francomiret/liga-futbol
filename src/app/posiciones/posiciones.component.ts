@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-
+import { Component, NgModule } from '@angular/core';
+import { MatTableModule } from '@angular/material/table';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 @Component({
   selector: 'app-posiciones',
   templateUrl: './posiciones.component.html',
@@ -7,7 +11,6 @@ import { Component } from '@angular/core';
 })
 export class PosicionesComponent {
   displayedColumns = [
-    'position',
     'club',
     'pj',
     'g',
@@ -38,7 +41,7 @@ export interface PositionsElements {
 const ELEMENT_DATA: PositionsElements[] = [
   {
     position: 1,
-    club: 'Club Deportivo Barú',
+    club: 'C.D. Barú',
     puntos: 39,
     pj: 13,
     gf: 10,
@@ -50,7 +53,7 @@ const ELEMENT_DATA: PositionsElements[] = [
   },
   {
     position: 2,
-    club: 'Club Atlético General Urquiza',
+    club: 'C.A. General Urquiza',
     puntos: 29,
     pj: 13,
     gf: 90,
@@ -62,7 +65,7 @@ const ELEMENT_DATA: PositionsElements[] = [
   },
   {
     position: 3,
-    club: 'Club Atlético Baylina A',
+    club: 'C.A. Baylina A',
     puntos: 29,
     pj: 13,
     gf: 90,
@@ -74,7 +77,7 @@ const ELEMENT_DATA: PositionsElements[] = [
   },
   {
     position: 4,
-    club: 'Club Atlético Baylina B',
+    club: 'C.A. Baylina B',
     puntos: 29,
     pj: 13,
     gf: 90,
@@ -86,7 +89,7 @@ const ELEMENT_DATA: PositionsElements[] = [
   },
   {
     position: 5,
-    club: 'Deportivo Berduc',
+    club: 'D. Berduc',
     puntos: 29,
     pj: 13,
     gf: 90,
@@ -98,7 +101,7 @@ const ELEMENT_DATA: PositionsElements[] = [
   },
   {
     position: 6,
-    club: 'Sportivo Villa Clara',
+    club: 'S. Villa Clara',
     puntos: 29,
     pj: 13,
     gf: 90,
@@ -110,7 +113,7 @@ const ELEMENT_DATA: PositionsElements[] = [
   },
   {
     position: 7,
-    club: 'Club Atlético Huracán de Hocker',
+    club: 'C.A.H. de Hocker',
     puntos: 29,
     pj: 13,
     gf: 90,
@@ -122,7 +125,7 @@ const ELEMENT_DATA: PositionsElements[] = [
   },
   {
     position: 8,
-    club: 'Club Deportivo Hambis',
+    club: 'C.D. Hambis',
     puntos: 29,
     pj: 13,
     gf: 90,
@@ -134,7 +137,7 @@ const ELEMENT_DATA: PositionsElements[] = [
   },
   {
     position: 9,
-    club: 'Club Independiente de Jubileo',
+    club: 'C.I. de Jubileo',
     puntos: 29,
     pj: 13,
     gf: 90,
@@ -170,7 +173,7 @@ const ELEMENT_DATA: PositionsElements[] = [
   },
   {
     position: 12,
-    club: 'Club Atlético San Antonio',
+    club: 'C.A. San Antonio',
     puntos: 29,
     pj: 13,
     gf: 90,
@@ -181,3 +184,17 @@ const ELEMENT_DATA: PositionsElements[] = [
     p: 3,
   },
 ];
+
+const matModules = [
+  MatTableModule,
+  MatDividerModule,
+  MatIconModule,
+  MatCardModule,
+];
+
+@NgModule({
+  declarations: [PosicionesComponent],
+  exports: [PosicionesComponent],
+  imports: [CommonModule, matModules],
+})
+export class PosicionesModule {}
