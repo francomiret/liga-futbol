@@ -10,31 +10,25 @@ import { MatCardModule } from '@angular/material/card';
   styleUrls: ['./posiciones.component.scss'],
 })
 export class PosicionesComponent {
-  displayedColumns = [
-    'club',
-    'pj',
-    'g',
-    'e',
-    'p',
-    'puntos',
-    'gf',
-    'gc',
-    'dg',
-  ];
+  displayedColumns = ['club', 'pj', 'g', 'e', 'p', 'puntos', 'gf', 'gc', 'dg'];
   dataSource = ELEMENT_DATA;
+  getPuntos(tabla: PositionsElements): number {
+    return tabla.g * 3 + tabla.e;
+  }
+  getDiferenciaDeGol(tabla: PositionsElements): number {
+    return tabla.gf - tabla.gc;
+  }
 }
 
 export interface PositionsElements {
   club: string;
   position: number;
-  puntos: number;
   pj: number;
   g: number;
   e: number;
   p: number;
   gf: number;
   gc: number;
-  dg: number;
   ultimosCinco?: number[];
 }
 
@@ -42,10 +36,8 @@ const ELEMENT_DATA: PositionsElements[] = [
   {
     position: 1,
     club: 'C.D. Barú',
-    puntos: 39,
     pj: 13,
-    gf: 10,
-    dg: 30,
+    gf: 100,
     e: 0,
     g: 13,
     gc: 9,
@@ -54,10 +46,8 @@ const ELEMENT_DATA: PositionsElements[] = [
   {
     position: 2,
     club: 'C.A. General Urquiza',
-    puntos: 29,
     pj: 13,
     gf: 90,
-    dg: 60,
     e: 1,
     g: 9,
     gc: 30,
@@ -66,10 +56,8 @@ const ELEMENT_DATA: PositionsElements[] = [
   {
     position: 3,
     club: 'C.A. Baylina A',
-    puntos: 29,
     pj: 13,
     gf: 90,
-    dg: 60,
     e: 1,
     g: 9,
     gc: 30,
@@ -78,10 +66,8 @@ const ELEMENT_DATA: PositionsElements[] = [
   {
     position: 4,
     club: 'C.A. Baylina B',
-    puntos: 29,
     pj: 13,
     gf: 90,
-    dg: 60,
     e: 1,
     g: 9,
     gc: 30,
@@ -90,10 +76,8 @@ const ELEMENT_DATA: PositionsElements[] = [
   {
     position: 5,
     club: 'D. Berduc',
-    puntos: 29,
     pj: 13,
     gf: 90,
-    dg: 60,
     e: 1,
     g: 9,
     gc: 30,
@@ -102,10 +86,8 @@ const ELEMENT_DATA: PositionsElements[] = [
   {
     position: 6,
     club: 'S. Villa Clara',
-    puntos: 29,
     pj: 13,
     gf: 90,
-    dg: 60,
     e: 1,
     g: 9,
     gc: 30,
@@ -114,10 +96,8 @@ const ELEMENT_DATA: PositionsElements[] = [
   {
     position: 7,
     club: 'C.A.H. de Hocker',
-    puntos: 29,
     pj: 13,
     gf: 90,
-    dg: 60,
     e: 1,
     g: 9,
     gc: 30,
@@ -126,10 +106,8 @@ const ELEMENT_DATA: PositionsElements[] = [
   {
     position: 8,
     club: 'C.D. Hambis',
-    puntos: 29,
     pj: 13,
     gf: 90,
-    dg: 60,
     e: 1,
     g: 9,
     gc: 30,
@@ -138,10 +116,8 @@ const ELEMENT_DATA: PositionsElements[] = [
   {
     position: 9,
     club: 'C.I. de Jubileo',
-    puntos: 29,
     pj: 13,
     gf: 90,
-    dg: 60,
     e: 1,
     g: 9,
     gc: 30,
@@ -150,10 +126,8 @@ const ELEMENT_DATA: PositionsElements[] = [
   {
     position: 10,
     club: 'Las Palmas',
-    puntos: 29,
     pj: 13,
     gf: 90,
-    dg: 60,
     e: 1,
     g: 9,
     gc: 30,
@@ -162,10 +136,8 @@ const ELEMENT_DATA: PositionsElements[] = [
   {
     position: 11,
     club: 'Azul Azul',
-    puntos: 29,
     pj: 13,
     gf: 90,
-    dg: 60,
     e: 1,
     g: 9,
     gc: 30,
@@ -174,10 +146,8 @@ const ELEMENT_DATA: PositionsElements[] = [
   {
     position: 12,
     club: 'C.A. San Antonio',
-    puntos: 29,
     pj: 13,
     gf: 90,
-    dg: 60,
     e: 1,
     g: 9,
     gc: 30,

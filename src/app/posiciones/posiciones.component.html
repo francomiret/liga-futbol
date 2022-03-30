@@ -1,5 +1,5 @@
 <table class="example-container" mat-table [dataSource]="dataSource">
-  <ng-container class="club-container" matColumnDef="club" sticky>
+  <ng-container matColumnDef="club" sticky>
     <th class="club-container" mat-header-cell *matHeaderCellDef>Club</th>
     <td class="club-container" mat-cell *matCellDef="let element">
       <b>{{ element.position }}</b>
@@ -27,7 +27,7 @@
     </th>
     <td class="cells" mat-cell *matCellDef="let element">
       <strong>
-        {{ element.puntos }}
+        {{ getPuntos(element) }}
       </strong>
     </td>
   </ng-container>
@@ -63,7 +63,7 @@
   <ng-container matColumnDef="dg">
     <th class="cells" mat-header-cell *matHeaderCellDef>DG</th>
     <td class="cells" mat-cell *matCellDef="let element">
-      {{ element.dg }}
+      {{ getDiferenciaDeGol(element) }}
     </td>
   </ng-container>
 
