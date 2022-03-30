@@ -2,6 +2,7 @@
   "name": "liga-futbol",
   "version": "0.0.0",
   "scripts": {
+    "deploy": "ng build --prod --base-href=/liga-futbol/",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
