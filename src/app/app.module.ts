@@ -15,6 +15,8 @@ import { PosicionesModule } from './posiciones/posiciones.component';
 import { FixtureModule } from './fixture/fixture.component';
 import { GoleadoresModule } from './goleadores/goleadores.component';
 import { TarjetasModule } from './tarjetas/tarjetas.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatCardModule } from '@angular/material/card';
 
 const matModules = [
   MatToolbarModule,
@@ -22,6 +24,8 @@ const matModules = [
   MatButtonModule,
   MatDividerModule,
   MatTabsModule,
+  MatSidenavModule,
+  MatCardModule,
 ];
 
 @NgModule({

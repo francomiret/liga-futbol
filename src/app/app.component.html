@@ -1,15 +1,16 @@
-  <mat-toolbar>La liga de las colonias </mat-toolbar>
-  <mat-tab-group mat-align-tabs="center">
+<mat-toolbar>La liga de las colonias </mat-toolbar>
+<mat-sidenav-container style="height: 100%">
+  <mat-tab-group mat-align-tabs="center" style="height: 100%">
     <mat-tab>
       <ng-template mat-tab-label> FIXTURE </ng-template>
-      <app-fixture></app-fixture>
+      <mat-card>
+        <app-fixture></app-fixture>
+      </mat-card>
     </mat-tab>
 
     <mat-tab>
       <ng-template mat-tab-label> POSICIONES </ng-template>
-      <ng-container>
-        <app-posiciones></app-posiciones>
-      </ng-container>
+      <app-posiciones></app-posiciones>
     </mat-tab>
 
     <mat-tab>
@@ -23,3 +24,4 @@
     </mat-tab>
   </mat-tab-group>
   <!-- <router-outlet></router-outlet> -->
+</mat-sidenav-container>
