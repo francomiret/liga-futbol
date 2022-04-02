@@ -1,1 +1,26 @@
-<p>goleadores works!</p>
+<table class="example-container" mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="jugador" sticky>
+    <th class="club-container" mat-header-cell *matHeaderCellDef>Jugador</th>
+    <td class="club-container" mat-cell *matCellDef="let element">
+      <b>{{ element.position }}</b>
+      {{ element.jugador }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="club">
+    <th class="cells" mat-header-cell *matHeaderCellDef>Equipo</th>
+    <td class="cells" mat-cell *matCellDef="let element">
+      {{ element.club }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="goles">
+    <th class="cells" mat-header-cell *matHeaderCellDef>Goles</th>
+    <td class="cells" mat-cell *matCellDef="let element">
+      {{ element.goles }}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
