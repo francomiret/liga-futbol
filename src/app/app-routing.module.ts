@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClubesComponent } from './club/club.component';
+import { TorneoComponent } from './torneo/torneo.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'torneo', pathMatch: 'full' },
+
   { path: 'clubes', component: ClubesComponent },
+  { path: 'torneo', component: TorneoComponent },
 ];
 
 @NgModule({

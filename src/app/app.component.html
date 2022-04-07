@@ -1,27 +1,21 @@
-<mat-toolbar>La liga de las colonias </mat-toolbar>
+<mat-toolbar>
+  <button
+    mat-icon-button
+    class="example-icon"
+    (click)="sidenav.toggle()"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  La liga de las colonias
+</mat-toolbar>
 <mat-sidenav-container style="height: 100%">
-  <mat-tab-group mat-align-tabs="center" style="height: 100%">
-    <mat-tab>
-      <ng-template mat-tab-label> FIXTURE </ng-template>
-      <mat-card>
-        <app-fixture></app-fixture>
-      </mat-card>
-    </mat-tab>
+  <mat-sidenav #sidenav mode="over">
+    <mat-selection-list [multiple]="false">
+      <mat-list-option [routerLink]="['/torneo']"> 2022 </mat-list-option>
+      <mat-list-option [routerLink]="['/clubes']"> Clubes </mat-list-option>
+    </mat-selection-list>
+  </mat-sidenav>
 
-    <mat-tab>
-      <ng-template mat-tab-label> POSICIONES </ng-template>
-      <app-posiciones></app-posiciones>
-    </mat-tab>
-
-    <mat-tab>
-      <ng-template mat-tab-label> GOLEADORES </ng-template>
-      <app-goleadores></app-goleadores>
-    </mat-tab>
-
-    <mat-tab>
-      <ng-template mat-tab-label> TARJETAS </ng-template>
-      <app-tarjetas></app-tarjetas>
-    </mat-tab>
-  </mat-tab-group>
-  <!-- <router-outlet></router-outlet> -->
+  <router-outlet></router-outlet>
 </mat-sidenav-container>
