@@ -1,35 +1,38 @@
-<mat-form-field appearance="fill">
-  <mat-label>Fecha</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let food of foods" [value]="food.value">
-      {{ food.viewValue }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
 <ng-container *ngFor="let fecha of fixture">
   <mat-card style="margin-bottom: 5px">
     <mat-card-title>Fecha {{ fecha.id }} </mat-card-title>
     <mat-card-subtitle>{{ fecha.fecha }} </mat-card-subtitle>
     <mat-card-subtitle
-      >{{ fecha.organizador }} | {{ fecha.cancha }}
+      >{{ getClubName(fecha.equipoOrganizadorId) }} |
+      {{ getCanchaLocale(fecha.canchaId) }}
     </mat-card-subtitle>
     <mat-card-content>
       <mat-grid-list *ngFor="let partido of fecha.partidos" cols="12">
         <mat-grid-tile [colspan]="1">
-          <mat-icon>circle</mat-icon>
+          <img
+            style="width: 100%"
+            [src]="getClubImage(partido.equipoLocalId)"
+          />
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="4"> {{ partido.local }}</mat-grid-tile>
+        <mat-grid-tile [colspan]="4">
+          {{ getClubName(partido.equipoLocalId) }}</mat-grid-tile
+        >
         <mat-grid-tile [colspan]="2">
-          <strong *ngIf="partido.resultado; else horario">{{
-            partido.resultado
+          <strong *ngIf="partido.jugado; else horario">{{
+            getResultadoPartido(partido.golesLocalId, partido.golesVisitanteId)
           }}</strong>
           <ng-template #horario>
             <strong>{{ partido.horario }}</strong>
           </ng-template>
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="4"> {{ partido.visitante }}</mat-grid-tile>
+        <mat-grid-tile [colspan]="4">
+          {{ getClubName(partido.equipoVisitanteId) }}</mat-grid-tile
+        >
         <mat-grid-tile [colspan]="1">
-          <mat-icon>circle</mat-icon>
+          <img
+            style="width: 100%"
+            [src]="getClubImage(partido.equipoVisitanteId)"
+          />
         </mat-grid-tile>
         <mat-divider></mat-divider>
       </mat-grid-list>
