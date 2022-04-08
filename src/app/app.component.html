@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar class="md-hue-2">
   <button
     mat-icon-button
     class="example-icon"
@@ -12,8 +12,18 @@
 <mat-sidenav-container style="height: 100%">
   <mat-sidenav #sidenav mode="over">
     <mat-selection-list [multiple]="false">
-      <mat-list-option [routerLink]="['/torneo']"> 2022 </mat-list-option>
-      <mat-list-option [routerLink]="['/clubes']"> Clubes </mat-list-option>
+      <mat-list-option [routerLink]="['/torneo']">
+        <p class="items">
+          <mat-icon class="icons">emoji_events</mat-icon>
+          2022
+        </p>
+      </mat-list-option>
+      <mat-list-option [routerLink]="['/clubes']">
+        <p class="items">
+          <mat-icon class="icons">security</mat-icon>
+          Clubes
+        </p>
+      </mat-list-option>
     </mat-selection-list>
   </mat-sidenav>
 
