@@ -4,7 +4,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
-import { equipos, fechas, canchas } from 'src/models/test-data';
+import { equipos, fechas, canchas, partidos } from 'src/models/test-data';
+import { Partido } from 'src/models/torneo';
 
 interface Food {
   value: string;
@@ -31,6 +32,16 @@ export class FixtureComponent implements OnInit {
   }
   public getResultadoPartido(golesLocal: string[], golesVisitante: string[]) {
     return `${golesLocal.length} - ${golesVisitante.length}`;
+  }
+  public getPartidos(partidosId: string[]) {
+    const nuevosPartidos: Partido[] = [];
+    partidosId.forEach((partidoId) => {
+      const partido = partidos.find((x) => x.id === partidoId);
+      if (partido) {
+        nuevosPartidos.push(partido);
+      }
+    });
+    return nuevosPartidos;
   }
 
   ngOnInit(): void {}
