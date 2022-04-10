@@ -1,9 +1,9 @@
 <ng-container *ngFor="let fecha of fixture">
   <mat-card style="margin-bottom: 5px">
     <mat-card-title>Fecha {{ fecha.id }} </mat-card-title>
-    <mat-card-subtitle>{{ fecha.fecha }} </mat-card-subtitle>
-    <mat-card-subtitle
-      >{{ getClubName(fecha.equipoOrganizadorId) }} |
+    <mat-card-subtitle>
+      <strong>{{ fecha.fecha }}</strong> |
+      {{ getClubName(fecha.equipoOrganizadorId) }} |
       {{ getCanchaLocale(fecha.canchaId) }}
     </mat-card-subtitle>
     <mat-card-content>
