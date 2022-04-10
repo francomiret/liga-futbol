@@ -6,6 +6,7 @@ import { equipos, jugadores, partidos } from 'src/models/test-data';
 interface Tarjetas {
   club: string;
   jugador: string;
+  imagen: string;
   ta: number;
   tr: number;
 }
@@ -15,7 +16,7 @@ interface Tarjetas {
   styleUrls: ['./tarjetas.component.scss'],
 })
 export class TarjetasComponent {
-  displayedColumns = ['jugador', 'club', 'ta', 'tr'];
+  displayedColumns = ['jugador', 'ta', 'tr'];
   public tarjetas: Tarjetas[] = [];
   ngOnInit(): void {
     const jugadoresId = [
@@ -30,6 +31,7 @@ export class TarjetasComponent {
       const goleador: Tarjetas = {
         jugador: this.getJugadorName(jugadorId),
         club: this.getEquipoJugador(jugadorId),
+        imagen: this.getImagenEquipoJugador(jugadorId),
         ta: this.obtainYellowCards()[jugadorId],
         tr: this.obtainRedCards()[jugadorId],
       };
@@ -45,6 +47,13 @@ export class TarjetasComponent {
     return (
       equipos.find((x) => x.id === jugadores.find((x) => x.id === id)?.equipoId)
         ?.nombre ?? ''
+    );
+  }
+
+  public getImagenEquipoJugador(id: string) {
+    return (
+      equipos.find((x) => x.id === jugadores.find((x) => x.id === id)?.equipoId)
+        ?.imagen ?? ''
     );
   }
 

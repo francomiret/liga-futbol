@@ -6,17 +6,20 @@
       mat-cell
       *matCellDef="let element; let i = index"
     >
-      <b>{{ i + 1 }}</b>
-      {{ element.jugador }}
-    </td>
-  </ng-container>
+      <div class="jugador-content">
+        <strong style="margin-right: 5px">{{ i + 1 }}</strong>
+        <img style="width: 30px; margin-right: 5px" [src]="element.imagen" />
+        {{ element.jugador }}
+      </div>
+    </td></ng-container
+  >
 
-  <ng-container matColumnDef="club">
+  <!-- <ng-container matColumnDef="club">
     <th class="cells" mat-header-cell *matHeaderCellDef>Equipo</th>
     <td class="cells" mat-cell *matCellDef="let element">
       {{ element.club }}
     </td>
-  </ng-container>
+  </ng-container> -->
 
   <ng-container matColumnDef="ta">
     <th class="cells" mat-header-cell *matHeaderCellDef>Tarjeta amarilla</th>

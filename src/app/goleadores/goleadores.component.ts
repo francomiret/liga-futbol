@@ -6,6 +6,7 @@ import { equipos, jugadores, partidos } from 'src/models/test-data';
 interface Goleador {
   club: string;
   jugador: string;
+  imagen: string;
   goles: number;
 }
 
@@ -23,21 +24,29 @@ export class GoleadoresComponent implements OnInit {
       const goleador: Goleador = {
         jugador: this.getJugadorName(jugadorId),
         club: this.getEquipoJugador(jugadorId),
+        imagen: this.getImagenEquipoJugador(jugadorId),
         goles: this.getGoleadores()[jugadorId],
       };
       this.goleadores.push(goleador);
     }
   }
-  displayedColumns = ['jugador', 'club', 'goles'];
+  displayedColumns = ['jugador', 'goles'];
 
-  public getJugadorName(id: string) {
+  private getJugadorName(id: string) {
     return jugadores.find((x) => x.id === id)?.nombre ?? '';
   }
 
-  public getEquipoJugador(id: string) {
+  private getEquipoJugador(id: string) {
     return (
       equipos.find((x) => x.id === jugadores.find((x) => x.id === id)?.equipoId)
         ?.nombre ?? ''
+    );
+  }
+
+  private getImagenEquipoJugador(id: string) {
+    return (
+      equipos.find((x) => x.id === jugadores.find((x) => x.id === id)?.equipoId)
+        ?.imagen ?? ''
     );
   }
 
