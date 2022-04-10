@@ -7,11 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { equipos, fechas, canchas, partidos } from 'src/models/test-data';
 import { Partido } from 'src/models/torneo';
 
-interface Food {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
   selector: 'app-fixture',
   templateUrl: './fixture.component.html',

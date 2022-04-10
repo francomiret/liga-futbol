@@ -3,6 +3,13 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { equipos, jugadores, partidos } from 'src/models/test-data';
 
+interface Goleador {
+  club: string;
+  position: number;
+  jugador: string;
+  goles: number;
+}
+
 @Component({
   selector: 'app-goleadores',
   templateUrl: './goleadores.component.html',
@@ -50,13 +57,6 @@ export class GoleadoresComponent implements OnInit {
     });
     return repetidos;
   }
-}
-
-export interface Goleador {
-  club: string;
-  position: number;
-  jugador: string;
-  goles: number;
 }
 
 const matModules = [MatTableModule];

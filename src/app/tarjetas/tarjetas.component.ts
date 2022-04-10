@@ -1,7 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
+import { equipos, jugadores, partidos } from 'src/models/test-data';
 
+interface Tarjetas {
+  club: string;
+  position: number;
+  jugador: string;
+  ta: number;
+  tr: number;
+}
 @Component({
   selector: 'app-tarjetas',
   templateUrl: './tarjetas.component.html',
@@ -9,82 +17,68 @@ import { MatTableModule } from '@angular/material/table';
 })
 export class TarjetasComponent {
   displayedColumns = ['jugador', 'club', 'ta', 'tr'];
-  dataSource = ELEMENT_DATA;
+  public tarjetas: Tarjetas[] = [];
+  ngOnInit(): void {
+    const jugadoresId = [
+      ...new Set([
+        ...Object.keys(this.obtainRedCards()),
+        ...Object.keys(this.obtainYellowCards()),
+      ]),
+    ];
+
+    for (let i = 0; i < jugadoresId.length; i++) {
+      let jugadorId = jugadoresId[i];
+      const goleador: Tarjetas = {
+        jugador: this.getJugadorName(jugadorId),
+        club: this.getEquipoJugador(jugadorId),
+        ta: this.obtainYellowCards()[jugadorId],
+        tr: this.obtainRedCards()[jugadorId],
+        position: i + 1,
+      };
+      this.tarjetas.push(goleador);
+    }
+  }
+
+  public getJugadorName(id: string) {
+    return jugadores.find((x) => x.id === id)?.nombre ?? '';
+  }
+
+  public getEquipoJugador(id: string) {
+    return (
+      equipos.find((x) => x.id === jugadores.find((x) => x.id === id)?.equipoId)
+        ?.nombre ?? ''
+    );
+  }
+
+  public obtainRedCards() {
+    const allRedCards: string[] = [];
+    let repetidos: Record<string, number> = {};
+
+    partidos.forEach((partido) => {
+      allRedCards.push(...partido.rojasLocalId);
+      allRedCards.push(...partido.rojasVisitanteId);
+    });
+    allRedCards.forEach(function (numero) {
+      repetidos[numero] = (repetidos[numero] || 0) + 1;
+    });
+    return repetidos;
+  }
+
+  public obtainYellowCards() {
+    const allYellowCards: string[] = [];
+    let repetidos: Record<string, number> = {};
+
+    partidos.forEach((partido) => {
+      allYellowCards.push(...partido.amarillasLocalId);
+      allYellowCards.push(...partido.amarillasVisitanteId);
+    });
+    allYellowCards.forEach(function (numero) {
+      repetidos[numero] = (repetidos[numero] || 0) + 1;
+    });
+    return repetidos;
+  }
 }
 
-export interface Tarjetas {
-  club: string;
-  position: number;
-  jugador: string;
-  ta: number;
-  tr: number;
-}
-
-const ELEMENT_DATA: Tarjetas[] = [
-  {
-    position: 1,
-    club: 'C.D. Barú',
-    jugador: 'Lihuen Segovia',
-    ta: 2,
-    tr: 10,
-  },
-  {
-    position: 2,
-    club: 'C.A. General Urquiza',
-    jugador: 'Lihuen Segovia',
-    ta: 2,
-    tr: 10,
-  },
-  {
-    position: 3,
-    club: 'C.A. Baylina A',
-    jugador: 'Lihuen Segovia',
-    ta: 2,
-    tr: 10,
-  },
-  {
-    position: 4,
-    club: 'C.A. Baylina B',
-    jugador: 'Lihuen Segovia',
-    ta: 2,
-    tr: 10,
-  },
-  {
-    position: 5,
-    club: 'D. Berduc',
-    jugador: 'Lihuen Segovia',
-    ta: 2,
-    tr: 10,
-  },
-  {
-    position: 6,
-    club: 'S. Villa Clara',
-    jugador: 'Lihuen Segovia',
-    ta: 2,
-    tr: 10,
-  },
-  {
-    position: 7,
-    club: 'C.A.H. de Hocker',
-    jugador: 'Lihuen Segovia',
-    ta: 2,
-    tr: 10,
-  },
-  {
-    position: 8,
-    club: 'C.D. Hambis',
-    jugador: 'Lihuen Segovia',
-    ta: 2,
-    tr: 10,
-  },
-  {
-    position: 9,
-    club: 'C.I. de Jubileo',
-    jugador: 'Lihuen Segovia',
-    ta: 2,
-    tr: 10,
-  },
-];
 const matModules = [MatTableModule];
 
 @NgModule({
