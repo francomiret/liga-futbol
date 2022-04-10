@@ -31,12 +31,12 @@ export interface Equipo {
   id: string;
   nombre: string;
   imagen?: string;
-  jugadores: Jugador[];
 }
 export interface Jugador {
   id: string;
   nombre: string;
-  edad?: string;
+  equipoId: string;
+  fechaNacimiento?: string;
   imagen?: string;
   posicion?: string;
 }
