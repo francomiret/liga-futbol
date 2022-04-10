@@ -1,18 +1,22 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
+import { equipos, partidos } from 'src/models/test-data';
+import { Equipo, Partido } from 'src/models/torneo';
 
 interface Posicion {
-  club: string;
+  equipo: Equipo;
   pj: number;
   g: number;
   e: number;
   p: number;
   gf: number;
   gc: number;
+  dg: number;
+  puntos: number;
   ultimosCinco?: number[];
 }
 
@@ -21,127 +25,129 @@ interface Posicion {
   templateUrl: './posiciones.component.html',
   styleUrls: ['./posiciones.component.scss'],
 })
-export class PosicionesComponent {
+export class PosicionesComponent implements OnInit {
+  public posiciones: Posicion[] = [];
+  ngOnInit(): void {
+    equipos.forEach((equipo) => {
+      let posicion: Posicion = {
+        equipo: equipo,
+        e: 0,
+        g: 0,
+        p: 0,
+        gc: 0,
+        gf: 0,
+        pj: 0,
+        dg: 0,
+        puntos: 0,
+      };
+      const partidosLocal = partidos.filter(
+        (x) => x.equipoLocalId === equipo.id && x.jugado === true
+      );
+      const partidosVisitante = partidos.filter(
+        (x) => x.equipoVisitanteId === equipo.id && x.jugado === true
+      );
+      console.log(partidosVisitante);
+      console.log(partidosLocal);
+
+      partidosLocal.forEach((partido) => {
+        posicion = {
+          ...posicion,
+          gf: posicion.gf + partido.golesLocalId.length,
+          gc: posicion.gc + partido.golesVisitanteId.length,
+          pj: posicion.pj + 1,
+        };
+        if (this.esEmpate(partido)) {
+          posicion = {
+            ...posicion,
+            e: posicion.e + 1,
+          };
+        } else if (this.ganoLocal(partido)) {
+          posicion = {
+            ...posicion,
+            g: posicion.g + 1,
+          };
+        } else if (this.ganoVisitante(partido)) {
+          posicion = {
+            ...posicion,
+            p: posicion.p + 1,
+          };
+        }
+      });
+
+      partidosVisitante.forEach((partido) => {
+        posicion = {
+          ...posicion,
+          gf: posicion.gf + partido.golesVisitanteId.length,
+          gc: posicion.gc + partido.golesLocalId.length,
+          pj: posicion.pj + 1,
+        };
+        if (this.esEmpate(partido)) {
+          posicion = {
+            ...posicion,
+            e: posicion.e + 1,
+          };
+        } else if (this.ganoLocal(partido)) {
+          posicion = {
+            ...posicion,
+            p: posicion.p + 1,
+          };
+        } else if (this.ganoVisitante(partido)) {
+          posicion = {
+            ...posicion,
+            g: posicion.g + 1,
+          };
+        }
+      });
+      posicion = {
+        ...posicion,
+        puntos: this.getPuntos(posicion),
+        dg: this.getDiferenciaDeGol(posicion),
+      };
+      this.posiciones.push(posicion);
+    });
+    // ordenado por diferencia de gol
+    this.posiciones.sort(function (a, b) {
+      if (a.dg < b.dg) {
+        return 1;
+      }
+      if (a.dg > b.dg) {
+        return -1;
+      }
+      return 0;
+    });
+    // ordenado por puntos
+    this.posiciones.sort(function (a, b) {
+      if (a.puntos < b.puntos) {
+        return 1;
+      }
+      if (a.puntos > b.puntos) {
+        return -1;
+      }
+      return 0;
+    });
+  }
   displayedColumns = ['club', 'puntos', 'g', 'e', 'p', 'pj', 'gf', 'gc', 'dg'];
-  dataSource = ELEMENT_DATA;
-  getPuntos(tabla: Posicion): number {
+
+  private esEmpate(partido: Partido) {
+    return partido.golesLocalId.length === partido.golesVisitanteId.length;
+  }
+
+  private ganoLocal(partido: Partido) {
+    return partido.golesLocalId.length > partido.golesVisitanteId.length;
+  }
+
+  private ganoVisitante(partido: Partido) {
+    return partido.golesLocalId.length < partido.golesVisitanteId.length;
+  }
+
+  private getPuntos(tabla: Posicion): number {
     return tabla.g * 3 + tabla.e;
   }
-  getDiferenciaDeGol(tabla: Posicion): number {
+
+  private getDiferenciaDeGol(tabla: Posicion): number {
     return tabla.gf - tabla.gc;
   }
 }
-
-const ELEMENT_DATA: Posicion[] = [
-  {
-    club: 'C.D. Barú',
-    pj: 13,
-    gf: 100,
-    e: 0,
-    g: 13,
-    gc: 9,
-    p: 0,
-  },
-  {
-    club: 'C.A. General Urquiza',
-    pj: 13,
-    gf: 90,
-    e: 1,
-    g: 9,
-    gc: 30,
-    p: 3,
-  },
-  {
-    club: 'C.A. Baylina A',
-    pj: 13,
-    gf: 90,
-    e: 1,
-    g: 9,
-    gc: 30,
-    p: 3,
-  },
-  {
-    club: 'C.A. Baylina B',
-    pj: 13,
-    gf: 90,
-    e: 1,
-    g: 9,
-    gc: 30,
-    p: 3,
-  },
-  {
-    club: 'D. Berduc',
-    pj: 13,
-    gf: 90,
-    e: 1,
-    g: 9,
-    gc: 30,
-    p: 3,
-  },
-  {
-    club: 'S. Villa Clara',
-    pj: 13,
-    gf: 90,
-    e: 1,
-    g: 9,
-    gc: 30,
-    p: 3,
-  },
-  {
-    club: 'C.A.H. de Hocker',
-    pj: 13,
-    gf: 90,
-    e: 1,
-    g: 9,
-    gc: 30,
-    p: 3,
-  },
-  {
-    club: 'C.D. Hambis',
-    pj: 13,
-    gf: 90,
-    e: 1,
-    g: 9,
-    gc: 30,
-    p: 3,
-  },
-  {
-    club: 'C.I. de Jubileo',
-    pj: 13,
-    gf: 90,
-    e: 1,
-    g: 9,
-    gc: 30,
-    p: 3,
-  },
-  {
-    club: 'Las Palmas',
-    pj: 13,
-    gf: 90,
-    e: 1,
-    g: 9,
-    gc: 30,
-    p: 3,
-  },
-  {
-    club: 'Azul Azul',
-    pj: 13,
-    gf: 90,
-    e: 1,
-    g: 9,
-    gc: 30,
-    p: 3,
-  },
-  {
-    club: 'C.A. San Antonio',
-    pj: 13,
-    gf: 90,
-    e: 1,
-    g: 9,
-    gc: 30,
-    p: 3,
-  },
-];
 
 const matModules = [
   MatTableModule,

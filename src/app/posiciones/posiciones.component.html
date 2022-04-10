@@ -1,4 +1,4 @@
-<table class="example-container" mat-table [dataSource]="dataSource">
+<table class="example-container" mat-table [dataSource]="posiciones">
   <ng-container matColumnDef="club" sticky>
     <th class="club-container" mat-header-cell *matHeaderCellDef>Club</th>
     <td
@@ -6,8 +6,14 @@
       mat-cell
       *matCellDef="let element; let i = index"
     >
-      <b>{{ i + 1 }}</b>
-      {{ element.club }}
+      <div class="club-content">
+        <strong style="margin-right: 5px">{{ i + 1 }}</strong>
+        <img
+          style="width: 30px; margin-right: 5px"
+          [src]="element.equipo.imagen"
+        />
+        {{ element.equipo.nombre }}
+      </div>
     </td>
   </ng-container>
 
@@ -27,11 +33,11 @@
 
   <ng-container matColumnDef="puntos">
     <th class="cells" mat-header-cell *matHeaderCellDef>
-      <strong>Pts.</strong>
+      <strong>Pts</strong>
     </th>
     <td class="cells" mat-cell *matCellDef="let element">
       <strong>
-        {{ getPuntos(element) }}
+        {{ element.puntos }}
       </strong>
     </td>
   </ng-container>
@@ -67,7 +73,7 @@
   <ng-container matColumnDef="dg">
     <th class="cells" mat-header-cell *matHeaderCellDef>DG</th>
     <td class="cells" mat-cell *matCellDef="let element">
-      {{ getDiferenciaDeGol(element) }}
+      {{ element.dg }}
     </td>
   </ng-container>
 
