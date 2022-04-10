@@ -7,7 +7,6 @@ import { MatCardModule } from '@angular/material/card';
 
 interface Posicion {
   club: string;
-  position: number;
   pj: number;
   g: number;
   e: number;
@@ -23,17 +22,7 @@ interface Posicion {
   styleUrls: ['./posiciones.component.scss'],
 })
 export class PosicionesComponent {
-  displayedColumns = [
-    'club',
-    'puntos',
-    'g',
-    'e',
-    'p',
-    'pj',
-    'gf',
-    'gc',
-    'dg',
-  ];
+  displayedColumns = ['club', 'puntos', 'g', 'e', 'p', 'pj', 'gf', 'gc', 'dg'];
   dataSource = ELEMENT_DATA;
   getPuntos(tabla: Posicion): number {
     return tabla.g * 3 + tabla.e;
@@ -45,7 +34,6 @@ export class PosicionesComponent {
 
 const ELEMENT_DATA: Posicion[] = [
   {
-    position: 1,
     club: 'C.D. Barú',
     pj: 13,
     gf: 100,
@@ -55,7 +43,6 @@ const ELEMENT_DATA: Posicion[] = [
     p: 0,
   },
   {
-    position: 2,
     club: 'C.A. General Urquiza',
     pj: 13,
     gf: 90,
@@ -65,7 +52,6 @@ const ELEMENT_DATA: Posicion[] = [
     p: 3,
   },
   {
-    position: 3,
     club: 'C.A. Baylina A',
     pj: 13,
     gf: 90,
@@ -75,7 +61,6 @@ const ELEMENT_DATA: Posicion[] = [
     p: 3,
   },
   {
-    position: 4,
     club: 'C.A. Baylina B',
     pj: 13,
     gf: 90,
@@ -85,7 +70,6 @@ const ELEMENT_DATA: Posicion[] = [
     p: 3,
   },
   {
-    position: 5,
     club: 'D. Berduc',
     pj: 13,
     gf: 90,
@@ -95,7 +79,6 @@ const ELEMENT_DATA: Posicion[] = [
     p: 3,
   },
   {
-    position: 6,
     club: 'S. Villa Clara',
     pj: 13,
     gf: 90,
@@ -105,7 +88,6 @@ const ELEMENT_DATA: Posicion[] = [
     p: 3,
   },
   {
-    position: 7,
     club: 'C.A.H. de Hocker',
     pj: 13,
     gf: 90,
@@ -115,7 +97,6 @@ const ELEMENT_DATA: Posicion[] = [
     p: 3,
   },
   {
-    position: 8,
     club: 'C.D. Hambis',
     pj: 13,
     gf: 90,
@@ -125,7 +106,6 @@ const ELEMENT_DATA: Posicion[] = [
     p: 3,
   },
   {
-    position: 9,
     club: 'C.I. de Jubileo',
     pj: 13,
     gf: 90,
@@ -135,7 +115,6 @@ const ELEMENT_DATA: Posicion[] = [
     p: 3,
   },
   {
-    position: 10,
     club: 'Las Palmas',
     pj: 13,
     gf: 90,
@@ -145,7 +124,6 @@ const ELEMENT_DATA: Posicion[] = [
     p: 3,
   },
   {
-    position: 11,
     club: 'Azul Azul',
     pj: 13,
     gf: 90,
@@ -155,7 +133,6 @@ const ELEMENT_DATA: Posicion[] = [
     p: 3,
   },
   {
-    position: 12,
     club: 'C.A. San Antonio',
     pj: 13,
     gf: 90,

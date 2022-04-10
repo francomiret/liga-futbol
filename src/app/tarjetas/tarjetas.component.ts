@@ -5,7 +5,6 @@ import { equipos, jugadores, partidos } from 'src/models/test-data';
 
 interface Tarjetas {
   club: string;
-  position: number;
   jugador: string;
   ta: number;
   tr: number;
@@ -33,7 +32,6 @@ export class TarjetasComponent {
         club: this.getEquipoJugador(jugadorId),
         ta: this.obtainYellowCards()[jugadorId],
         tr: this.obtainRedCards()[jugadorId],
-        position: i + 1,
       };
       this.tarjetas.push(goleador);
     }

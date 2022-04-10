@@ -5,7 +5,6 @@ import { equipos, jugadores, partidos } from 'src/models/test-data';
 
 interface Goleador {
   club: string;
-  position: number;
   jugador: string;
   goles: number;
 }
@@ -25,7 +24,6 @@ export class GoleadoresComponent implements OnInit {
         jugador: this.getJugadorName(jugadorId),
         club: this.getEquipoJugador(jugadorId),
         goles: this.getGoleadores()[jugadorId],
-        position: i + 1,
       };
       this.goleadores.push(goleador);
     }
