@@ -1,8 +1,12 @@
 <table class="example-container" mat-table [dataSource]="dataSource">
   <ng-container matColumnDef="club" sticky>
     <th class="club-container" mat-header-cell *matHeaderCellDef>Club</th>
-    <td class="club-container" mat-cell *matCellDef="let element">
-      <b>{{ element.position }}</b>
+    <td
+      class="club-container"
+      mat-cell
+      *matCellDef="let element; let i = index"
+    >
+      <b>{{ i + 1 }}</b>
       {{ element.club }}
     </td>
   </ng-container>

@@ -4,23 +4,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-@Component({
-  selector: 'app-posiciones',
-  templateUrl: './posiciones.component.html',
-  styleUrls: ['./posiciones.component.scss'],
-})
-export class PosicionesComponent {
-  displayedColumns = ['club', 'pj', 'g', 'e', 'p', 'puntos', 'gf', 'gc', 'dg'];
-  dataSource = ELEMENT_DATA;
-  getPuntos(tabla: PositionsElements): number {
-    return tabla.g * 3 + tabla.e;
-  }
-  getDiferenciaDeGol(tabla: PositionsElements): number {
-    return tabla.gf - tabla.gc;
-  }
-}
 
-export interface PositionsElements {
+interface Posicion {
   club: string;
   position: number;
   pj: number;
@@ -32,7 +17,33 @@ export interface PositionsElements {
   ultimosCinco?: number[];
 }
 
-const ELEMENT_DATA: PositionsElements[] = [
+@Component({
+  selector: 'app-posiciones',
+  templateUrl: './posiciones.component.html',
+  styleUrls: ['./posiciones.component.scss'],
+})
+export class PosicionesComponent {
+  displayedColumns = [
+    'club',
+    'puntos',
+    'g',
+    'e',
+    'p',
+    'pj',
+    'gf',
+    'gc',
+    'dg',
+  ];
+  dataSource = ELEMENT_DATA;
+  getPuntos(tabla: Posicion): number {
+    return tabla.g * 3 + tabla.e;
+  }
+  getDiferenciaDeGol(tabla: Posicion): number {
+    return tabla.gf - tabla.gc;
+  }
+}
+
+const ELEMENT_DATA: Posicion[] = [
   {
     position: 1,
     club: 'C.D. Barú',

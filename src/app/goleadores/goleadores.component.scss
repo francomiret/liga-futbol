@@ -18,23 +18,12 @@
     padding-right: 8px;
   }
   
-  th.mat-column-pj,
-  td.mat-column-pj,
-  th.mat-column-g,
-  td.mat-column-g,
-  th.mat-column-e,
-  td.mat-column-e,
-  th.mat-column-p,
-  td.mat-column-p,
-  th.mat-column-puntos,
-  td.mat-column-puntos,
-  td.mat-column-gf,
-  th.mat-column-gf,
-  td.mat-column-gc,
-  th.mat-column-gc,
-  th.mat-column-dg,
-  td.mat-column-dg {
+  th.mat-column-club,
+  td.mat-column-club,
+  th.mat-column-goles,
+  td.mat-column-goles{
     padding-left: 8px;
+    text-align: center;
   }
   
   .mat-table-sticky-border-elem-right {
