@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { equipos } from 'src/models/test-data';
 
@@ -8,15 +8,13 @@ import { equipos } from 'src/models/test-data';
   templateUrl: './club.component.html',
   styleUrls: ['./club.component.scss'],
 })
-export class ClubesComponent implements OnInit {
-  constructor() {}
+export class ClubesComponent {
   public clubes = equipos;
-  public clubClicked(nombre: string) {
-    console.log(nombre);
-  }
-  ngOnInit(): void {}
+  public clubClicked(nombre: string) {}
 }
+
 const materialModules = [MatCardModule];
+
 @NgModule({
   declarations: [ClubesComponent],
   exports: [ClubesComponent],

@@ -15,7 +15,7 @@ interface Tarjetas {
   templateUrl: './tarjetas.component.html',
   styleUrls: ['./tarjetas.component.scss'],
 })
-export class TarjetasComponent {
+export class TarjetasComponent implements OnInit {
   displayedColumns = ['jugador', 'ta', 'tr'];
   public tarjetas: Tarjetas[] = [];
   ngOnInit(): void {

@@ -46,8 +46,6 @@ export class PosicionesComponent implements OnInit {
       const partidosVisitante = partidos.filter(
         (x) => x.equipoVisitanteId === equipo.id && x.jugado === true
       );
-      console.log(partidosVisitante);
-      console.log(partidosLocal);
 
       partidosLocal.forEach((partido) => {
         posicion = {

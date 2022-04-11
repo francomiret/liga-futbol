@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -12,9 +12,8 @@ import { Partido } from 'src/models/torneo';
   templateUrl: './fixture.component.html',
   styleUrls: ['./fixture.component.scss'],
 })
-export class FixtureComponent implements OnInit {
-  constructor() {}
-  fixture = fechas;
+export class FixtureComponent {
+  public fixture = fechas;
 
   public getClubName(id: string) {
     return equipos.find((x) => x.id === id)?.nombre;
@@ -38,8 +37,6 @@ export class FixtureComponent implements OnInit {
     });
     return nuevosPartidos;
   }
-
-  ngOnInit(): void {}
 }
 const matModules = [
   MatCardModule,

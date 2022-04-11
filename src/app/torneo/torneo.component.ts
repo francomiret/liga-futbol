@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
@@ -16,11 +15,7 @@ import { TarjetasModule } from '../tarjetas/tarjetas.component';
   templateUrl: './torneo.component.html',
   styleUrls: ['./torneo.component.scss'],
 })
-export class TorneoComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class TorneoComponent {}
 
 const matModules = [MatToolbarModule, MatTabsModule, MatCardModule];
 
