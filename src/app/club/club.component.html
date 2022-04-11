@@ -1,16 +1,58 @@
-<mat-card
+<mat-expansion-panel
   *ngFor="let club of clubes"
-  style="
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 15px;
-  "
-  class="mat-elevation-z8 hover"
-  (click)="clubClicked(club.nombre)"
+  style="margin: 10px"
+  (opened)="panelOpenState = true"
+  (closed)="panelOpenState = false"
 >
-  <img style="width: 100px"  [src]="club.imagen" />
-  <mat-card-title> {{ club.nombre }}</mat-card-title>
-  <!-- <mat-card-subtitle>Jugadores {{ club.jugadores | json }}</mat-card-subtitle> -->
-</mat-card>
+  <mat-expansion-panel-header>
+    <div class="club-content">
+      <img style="width: 30px; margin-right: 5px" [src]="club.imagen" />
+      <mat-panel-title>
+        {{ club.nombre }}
+      </mat-panel-title>
+    </div>
+  </mat-expansion-panel-header>
+
+  <!-- <p><strong>Localidad: </strong> {{ getLocalidad(club.canchaId) }}</p> -->
+  <!-- <p>Jugadores:</p> -->
+  <table
+    class="example-container"
+    mat-table
+    [dataSource]="club.jugadores ?? []"
+  >
+    <ng-container matColumnDef="jugador" sticky>
+      <th class="club-container" mat-header-cell *matHeaderCellDef>Jugador</th>
+      <td
+        class="club-container"
+        mat-cell
+        *matCellDef="let element; let i = index"
+      >
+        {{ element.nombre }}
+      </td></ng-container
+    >
+    <ng-container matColumnDef="goles">
+      <th class="cells" mat-header-cell *matHeaderCellDef>Goles</th>
+      <td class="cells" mat-cell *matCellDef="let element">
+        {{ element.goles }}
+        <div *ngIf="!element.goles">0</div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="ta">
+      <th class="cells" mat-header-cell *matHeaderCellDef>TA</th>
+      <td class="cells" mat-cell *matCellDef="let element">
+        {{ element.ta }}
+        <div *ngIf="!element.ta">0</div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="tr">
+      <th class="cells" mat-header-cell *matHeaderCellDef>TR</th>
+      <td class="cells" mat-cell *matCellDef="let element">
+        {{ element.tr }}
+        <div *ngIf="!element.tr">0</div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</mat-expansion-panel>

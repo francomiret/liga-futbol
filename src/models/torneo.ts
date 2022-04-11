@@ -31,6 +31,8 @@ export interface Equipo {
   id: string;
   nombre: string;
   imagen?: string;
+  canchaId: string;
+  jugadores?: Jugador[];
 }
 export interface Jugador {
   id: string;
@@ -39,6 +41,9 @@ export interface Jugador {
   fechaNacimiento?: string;
   imagen?: string;
   posicion?: string;
+  goles?: number;
+  ta?: number;
+  tr?: number;
 }
 
 export interface Cancha {

@@ -1,7 +1,11 @@
-<mat-tab-group  backgroundColor="accent" mat-align-tabs="center" style="height: 100%">
+<mat-tab-group
+  backgroundColor="accent"
+  mat-align-tabs="center"
+  style="height: 100%"
+>
   <mat-tab>
     <ng-template mat-tab-label> FIXTURE </ng-template>
-      <app-fixture></app-fixture>
+    <app-fixture></app-fixture>
   </mat-tab>
 
   <mat-tab>
@@ -17,5 +21,10 @@
   <mat-tab>
     <ng-template mat-tab-label> TARJETAS </ng-template>
     <app-tarjetas></app-tarjetas>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label> CLUBES </ng-template>
+    <app-club></app-club>
   </mat-tab>
 </mat-tab-group>

@@ -6,7 +6,6 @@ import { TorneoComponent } from './torneo/torneo.component';
 const routes: Routes = [
   { path: '', redirectTo: 'torneo', pathMatch: 'full' },
 
-  { path: 'clubes', component: ClubesComponent },
   { path: 'torneo', component: TorneoComponent },
 ];
 
