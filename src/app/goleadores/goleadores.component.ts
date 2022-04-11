@@ -28,6 +28,17 @@ export class GoleadoresComponent implements OnInit {
         goles: this.getGoleadores()[jugadorId],
       };
       this.goleadores.push(goleador);
+        // ordenado por diferencia de gol
+    this.goleadores.sort(function (a, b) {
+      if (a.goles < b.goles) {
+        return 1;
+      }
+      if (a.goles > b.goles) {
+        return -1;
+      }
+      return 0;
+    });
+
     }
   }
   displayedColumns = ['jugador', 'goles'];

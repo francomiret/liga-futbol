@@ -28,14 +28,34 @@ export class TarjetasComponent {
 
     for (let i = 0; i < jugadoresId.length; i++) {
       let jugadorId = jugadoresId[i];
-      const goleador: Tarjetas = {
+      const jugador: Tarjetas = {
         jugador: this.getJugadorName(jugadorId),
         club: this.getEquipoJugador(jugadorId),
         imagen: this.getImagenEquipoJugador(jugadorId),
         ta: this.obtainYellowCards()[jugadorId],
         tr: this.obtainRedCards()[jugadorId],
       };
-      this.tarjetas.push(goleador);
+      this.tarjetas.push(jugador);
+      // ordenado por tarjetas amarillas
+      this.tarjetas.sort(function (a, b) {
+        if (a.ta < b.ta) {
+          return 1;
+        }
+        if (a.ta > b.ta) {
+          return -1;
+        }
+        return 0;
+      });
+      // ordenado por tarjetas rojas
+      this.tarjetas.sort(function (a, b) {
+        if (a.tr < b.tr) {
+          return 1;
+        }
+        if (a.tr > b.tr) {
+          return -1;
+        }
+        return 0;
+      });
     }
   }
 
