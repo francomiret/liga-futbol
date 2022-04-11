@@ -1,19 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
 import { equipos, fechas, canchas, partidos } from 'src/models/test-data';
-import { Partido } from 'src/models/torneo';
+import { Fecha, Partido } from 'src/models/torneo';
 
 @Component({
   selector: 'app-fixture',
   templateUrl: './fixture.component.html',
   styleUrls: ['./fixture.component.scss'],
 })
-export class FixtureComponent {
+export class FixtureComponent implements OnInit {
   public fixture = fechas;
+
+  public fechaActualId: number = 0;
+  ngOnInit(): void {
+    this.fechaActualId =
+      Number(fechas.find((x) => x.jugada === false)?.id) - 1 ?? 1;
+  }
 
   public getClubName(id: string) {
     return equipos.find((x) => x.id === id)?.nombre;
@@ -43,6 +50,7 @@ const matModules = [
   MatIconModule,
   MatDividerModule,
   MatGridListModule,
+  MatTabsModule,
 ];
 
 @NgModule({
