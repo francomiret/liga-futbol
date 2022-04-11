@@ -16,12 +16,10 @@ export class ClubesComponent implements OnInit {
   public clubes = equipos;
   public panelOpenState = false;
   public displayedColumns = ['jugador', 'goles', 'ta', 'tr'];
-  public jugadores: Jugador[] = [];
   ngOnInit(): void {
     this.clubes.forEach((club) => {
       club.jugadores = [];
       const jugadoresId = [...new Set([...this.getJugadoresId(club.id)])];
-      console.log(jugadoresId);
       for (let i = 0; i < jugadoresId.length; i++) {
         let jugadorId = jugadoresId[i];
         const jugador: Jugador = {
@@ -35,19 +33,19 @@ export class ClubesComponent implements OnInit {
     });
   }
 
-  public getJugadoresId(id: string) {
+  private getJugadoresId(id: string) {
     return jugadores.filter((x) => x.equipoId === id)?.map((x) => x.id) ?? '';
   }
 
-  public getJugador(id: string) {
+  private getJugador(id: string) {
     return jugadores.find((x) => x.id === id) ?? jugadores[0];
   }
 
-  public getLocalidad(id: string) {
+  private getLocalidad(id: string) {
     return canchas.find((x) => x.id === id)?.localidad;
   }
 
-  public getGoleadores() {
+  private getGoleadores() {
     const allGoleadores: string[] = [];
     let repetidos: Record<string, number> = {};
 
@@ -62,7 +60,7 @@ export class ClubesComponent implements OnInit {
     return repetidos;
   }
 
-  public obtainRedCards() {
+  private obtainRedCards() {
     const allRedCards: string[] = [];
     let repetidos: Record<string, number> = {};
 
@@ -76,7 +74,7 @@ export class ClubesComponent implements OnInit {
     return repetidos;
   }
 
-  public obtainYellowCards() {
+  private obtainYellowCards() {
     const allYellowCards: string[] = [];
     let repetidos: Record<string, number> = {};
 
