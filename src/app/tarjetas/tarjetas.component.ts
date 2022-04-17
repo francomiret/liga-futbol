@@ -28,7 +28,7 @@ export class TarjetasComponent implements OnInit {
   ngOnInit(): void {
     this.tarjetas$?.subscribe(async (x) => {
       this.tarjetas = x;
-      this.tarjetas.sort(fieldSorter(['-tr', '-ta']))
+      this.tarjetas.sort(fieldSorter(['-tr', '-ta']));
     });
   }
   displayedColumns = ['jugador', 'ta', 'tr'];
