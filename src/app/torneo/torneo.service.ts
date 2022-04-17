@@ -1,15 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map, switchMap, take, tap } from 'rxjs/operators';
-import { Equipo, Goleador, Jugador, Tarjetas } from 'src/models/torneo';
+import {
+  Equipo,
+  Goleador,
+  Jugador,
+  Posicion,
+  Tarjetas,
+} from 'src/models/torneo';
 import { FirebaseService } from '../firebase.service';
 import {
+  esEmpate,
+  ganoLocal,
+  ganoVisitante,
+  getDiferenciaDeGol,
   getEquipoJugador,
   getGoleadores,
   getImagenEquipoJugador,
   getJugador,
   getJugadoresId,
   getJugadorName,
+  getPuntos,
   obtainRedCards,
   obtainYellowCards,
 } from './torneo-utilities';
@@ -20,6 +31,7 @@ import {
 export class TorneoService {
   public clubes: Equipo[] = [];
   public tarjetas: Observable<Tarjetas[]>;
+  public posiciones: Observable<Posicion[]>;
   public goleadores: Observable<Goleador[]>;
 
   constructor(private service: FirebaseService) {
@@ -119,6 +131,95 @@ export class TorneoService {
                 });
               })
             );
+          })
+        );
+      })
+    );
+
+    /**
+     * Obtener posiciones
+     */
+    this.posiciones = this.service.getPartidos().pipe(
+      switchMap((par) => {
+        const partidos = par.map((x) => x.payload.doc.data());
+        return this.service.getEquipos().pipe(
+          map((eq) => {
+            const equipos = eq.map((x) => x.payload.doc.data());
+            return equipos.map((equipo) => {
+              let posicion: Posicion = {
+                equipo: equipo,
+                e: 0,
+                g: 0,
+                p: 0,
+                gc: 0,
+                gf: 0,
+                pj: 0,
+                dg: 0,
+                puntos: 0,
+              };
+              const partidosLocal = partidos.filter(
+                (x) => x.equipoLocalId === equipo.id && x.jugado === true
+              );
+              const partidosVisitante = partidos.filter(
+                (x) => x.equipoVisitanteId === equipo.id && x.jugado === true
+              );
+
+              partidosLocal.forEach((partido) => {
+                posicion = {
+                  ...posicion,
+                  gf: posicion.gf + partido.golesLocalId.length,
+                  gc: posicion.gc + partido.golesVisitanteId.length,
+                  pj: posicion.pj + 1,
+                };
+                if (esEmpate(partido)) {
+                  posicion = {
+                    ...posicion,
+                    e: posicion.e + 1,
+                  };
+                } else if (ganoLocal(partido)) {
+                  posicion = {
+                    ...posicion,
+                    g: posicion.g + 1,
+                  };
+                } else if (ganoVisitante(partido)) {
+                  posicion = {
+                    ...posicion,
+                    p: posicion.p + 1,
+                  };
+                }
+              });
+
+              partidosVisitante.forEach((partido) => {
+                posicion = {
+                  ...posicion,
+                  gf: posicion.gf + partido.golesVisitanteId.length,
+                  gc: posicion.gc + partido.golesLocalId.length,
+                  pj: posicion.pj + 1,
+                };
+                if (esEmpate(partido)) {
+                  posicion = {
+                    ...posicion,
+                    e: posicion.e + 1,
+                  };
+                } else if (ganoLocal(partido)) {
+                  posicion = {
+                    ...posicion,
+                    p: posicion.p + 1,
+                  };
+                } else if (ganoVisitante(partido)) {
+                  posicion = {
+                    ...posicion,
+                    g: posicion.g + 1,
+                  };
+                }
+              });
+              posicion = {
+                ...posicion,
+                puntos: getPuntos(posicion),
+                dg: getDiferenciaDeGol(posicion),
+              };
+              return posicion;
+            });
           })
         );
       })

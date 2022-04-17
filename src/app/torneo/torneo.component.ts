@@ -15,6 +15,7 @@ import {
   Goleador,
   Jugador,
   Partido,
+  Posicion,
   Tarjetas,
 } from 'src/models/torneo';
 import { Observable } from 'rxjs';
@@ -29,10 +30,13 @@ export class TorneoComponent {
   public clubes: Equipo[] = [];
   public tarjetas: Observable<Tarjetas[]>;
   public goleadores: Observable<Goleador[]>;
+  public posiciones: Observable<Posicion[]>;
+
   constructor(private torneoService: TorneoService) {
     this.clubes = this.torneoService.clubes;
     this.tarjetas = this.torneoService.tarjetas;
     this.goleadores = this.torneoService.goleadores;
+    this.posiciones = this.torneoService.posiciones;
   }
 }
 

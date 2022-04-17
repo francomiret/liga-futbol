@@ -1,4 +1,4 @@
-import { Equipo, Jugador, Partido } from 'src/models/torneo';
+import { Equipo, Jugador, Partido, Posicion } from 'src/models/torneo';
 
 export function getGoleadores(partidos: Partido[]) {
   const allGoleadores: string[] = [];
@@ -90,3 +90,23 @@ export const fieldSorter = (fields: any) => (a: any, b: any) =>
       return a[o] > b[o] ? dir : a[o] < b[o] ? -dir : 0;
     })
     .reduce((p: any, n: any) => (p ? p : n), 0);
+
+export function esEmpate(partido: Partido) {
+  return partido.golesLocalId.length === partido.golesVisitanteId.length;
+}
+
+export function ganoLocal(partido: Partido) {
+  return partido.golesLocalId.length > partido.golesVisitanteId.length;
+}
+
+export function ganoVisitante(partido: Partido) {
+  return partido.golesLocalId.length < partido.golesVisitanteId.length;
+}
+
+export function getPuntos(tabla: Posicion): number {
+  return tabla.g * 3 + tabla.e;
+}
+
+export function getDiferenciaDeGol(tabla: Posicion): number {
+  return tabla.gf - tabla.gc;
+}

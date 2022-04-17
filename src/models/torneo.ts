@@ -66,3 +66,16 @@ export interface Goleador {
   imagen: string;
   goles: number;
 }
+
+export interface Posicion {
+  equipo: Equipo;
+  pj: number;
+  g: number;
+  e: number;
+  p: number;
+  gf: number;
+  gc: number;
+  dg: number;
+  puntos: number;
+  ultimosCinco?: number[];
+}
