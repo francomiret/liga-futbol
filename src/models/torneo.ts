@@ -32,7 +32,7 @@ export interface Equipo {
   nombre: string;
   imagen?: string;
   canchaId: string;
-  jugadores?: Jugador[];
+  jugadores: Jugador[];
 }
 export interface Jugador {
   id: string;
@@ -50,4 +50,19 @@ export interface Cancha {
   id: string;
   nombre: string;
   localidad: string;
+}
+
+export interface Tarjetas {
+  club: string;
+  jugador: string;
+  imagen: string;
+  ta: number;
+  tr: number;
+}
+
+export interface Goleador {
+  club: string;
+  jugador: string;
+  imagen: string;
+  goles: number;
 }

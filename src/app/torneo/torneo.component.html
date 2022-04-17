@@ -15,16 +15,16 @@
 
   <mat-tab>
     <ng-template mat-tab-label> GOLEADORES </ng-template>
-    <app-goleadores></app-goleadores>
+    <app-goleadores [goleadores$]="goleadores"></app-goleadores>
   </mat-tab>
 
   <mat-tab>
     <ng-template mat-tab-label> TARJETAS </ng-template>
-    <app-tarjetas></app-tarjetas>
+    <app-tarjetas [tarjetas$]="tarjetas"></app-tarjetas>
   </mat-tab>
 
   <mat-tab>
     <ng-template mat-tab-label> CLUBES </ng-template>
-    <app-club></app-club>
+    <app-club [clubes]="clubes"></app-club>
   </mat-tab>
 </mat-tab-group>

@@ -1,14 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, Input, NgModule, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { equipos, jugadores, partidos } from 'src/models/test-data';
-
-interface Goleador {
-  club: string;
-  jugador: string;
-  imagen: string;
-  goles: number;
-}
+import { Observable } from 'rxjs/internal/Observable';
+import { Goleador } from 'src/models/torneo';
+import { fieldSorter } from '../torneo/torneo-utilities';
 
 @Component({
   selector: 'app-goleadores',
@@ -16,65 +11,17 @@ interface Goleador {
   styleUrls: ['./goleadores.component.scss'],
 })
 export class GoleadoresComponent implements OnInit {
+  @Input()
+  public goleadores$: Observable<Goleador[]> | undefined;
   public goleadores: Goleador[] = [];
-  ngOnInit(): void {
-    const goleadoresId = Object.keys(this.getGoleadores());
-    for (let i = 0; i < goleadoresId.length; i++) {
-      let jugadorId = goleadoresId[i];
-      const goleador: Goleador = {
-        jugador: this.getJugadorName(jugadorId),
-        club: this.getEquipoJugador(jugadorId),
-        imagen: this.getImagenEquipoJugador(jugadorId),
-        goles: this.getGoleadores()[jugadorId],
-      };
-      this.goleadores.push(goleador);
-        // ordenado por diferencia de gol
-    this.goleadores.sort(function (a, b) {
-      if (a.goles < b.goles) {
-        return 1;
-      }
-      if (a.goles > b.goles) {
-        return -1;
-      }
-      return 0;
-    });
 
-    }
+  ngOnInit(): void {
+    this.goleadores$?.subscribe(async (x) => {
+      this.goleadores = x;
+      this.goleadores.sort(fieldSorter(['-goles']));
+    });
   }
   displayedColumns = ['jugador', 'goles'];
-
-  private getJugadorName(id: string) {
-    return jugadores.find((x) => x.id === id)?.nombre ?? '';
-  }
-
-  private getEquipoJugador(id: string) {
-    return (
-      equipos.find((x) => x.id === jugadores.find((x) => x.id === id)?.equipoId)
-        ?.nombre ?? ''
-    );
-  }
-
-  private getImagenEquipoJugador(id: string) {
-    return (
-      equipos.find((x) => x.id === jugadores.find((x) => x.id === id)?.equipoId)
-        ?.imagen ?? ''
-    );
-  }
-
-  public getGoleadores() {
-    const allGoleadores: string[] = [];
-    let repetidos: Record<string, number> = {};
-
-    partidos.forEach((partido) => {
-      allGoleadores.push(...partido.golesLocalId);
-      allGoleadores.push(...partido.golesVisitanteId);
-    });
-
-    allGoleadores.forEach(function (numero) {
-      repetidos[numero] = (repetidos[numero] || 0) + 1;
-    });
-    return repetidos;
-  }
 }
 
 const matModules = [MatTableModule];

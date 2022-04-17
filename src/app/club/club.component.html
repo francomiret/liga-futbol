@@ -12,14 +12,7 @@
       </mat-panel-title>
     </div>
   </mat-expansion-panel-header>
-
-  <!-- <p><strong>Localidad: </strong> {{ getLocalidad(club.canchaId) }}</p> -->
-  <!-- <p>Jugadores:</p> -->
-  <table
-    class="example-container"
-    mat-table
-    [dataSource]="club.jugadores ?? []"
-  >
+  <table class="example-container" mat-table [dataSource]="club.jugadores">
     <ng-container matColumnDef="jugador" sticky>
       <th class="club-container" mat-header-cell *matHeaderCellDef>Jugador</th>
       <td
