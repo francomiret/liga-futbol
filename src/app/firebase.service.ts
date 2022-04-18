@@ -12,38 +12,13 @@ import {
   Jugador,
 } from 'src/models/torneo';
 import { Observable } from 'rxjs/internal/Observable';
-import { map, withLatestFrom } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseService {
-  constructor(private firestore: AngularFirestore) {
-    this.getTorneos().subscribe((torneos) => {
-      torneos.forEach((torneo: any) => {
-        this.torneos.push(torneo.payload.doc.data());
-      });
-    });
-
-    this.getCanchas().subscribe((canchas) => {
-      canchas.forEach((cancha: any) => {
-        this.canchas.push(cancha.payload.doc.data());
-      });
-    });
-
-    this.getFechas().subscribe((fechas) => {
-      fechas.forEach((fecha: any) => {
-        this.fechas.push(fecha.payload.doc.data());
-      });
-    });
-  }
-
-  public torneos: Torneo[] = [];
-  public partidos: Partido[] = [];
-  public fechas: Fecha[] = [];
-  public canchas: Cancha[] = [];
-  public jugadores: Jugador[] = [];
-  public equipos: Equipo[] = [];
+  constructor(private firestore: AngularFirestore) {}
 
   public getTorneos() {
     return this.firestore.collection('torneos').snapshotChanges() as Observable<

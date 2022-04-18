@@ -50,13 +50,6 @@ const matModules = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     matModules,
-    // provideFirebaseApp(() => initializeApp(environment.firebase)),
-    // provideAnalytics(() => getAnalytics()),
-    // provideDatabase(() => getDatabase()),
-    // provideFirestore(() => getFirestore()),
-    // provideRemoteConfig(() => getRemoteConfig()),
-    // provideStorage(() => getStorage()),
-    // StoreModule.forRoot({}, {}),
   ],
 
   providers: [ScreenTrackingService, UserTrackingService, FirebaseService],

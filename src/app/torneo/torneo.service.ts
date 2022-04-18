@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map, switchMap, take, tap } from 'rxjs/operators';
-import { partidos } from 'src/models/test-data';
 import {
   Equipo,
   Fixture,

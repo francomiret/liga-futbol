@@ -1,15 +1,7 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  Input,
-  NgModule,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, NgModule, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { Observable } from 'rxjs/internal/Observable';
-import { equipos, jugadores, partidos } from 'src/models/test-data';
 import { fieldSorter } from '../torneo/torneo-utilities';
 
 interface Tarjetas {
@@ -25,16 +17,17 @@ interface Tarjetas {
   styleUrls: ['./tarjetas.component.scss'],
 })
 export class TarjetasComponent implements OnInit {
+  @Input()
+  public tarjetas$: Observable<Tarjetas[]> | undefined;
+  public tarjetas: Tarjetas[] = [];
+  public displayedColumns = ['jugador', 'ta', 'tr'];
+
   ngOnInit(): void {
     this.tarjetas$?.subscribe(async (x) => {
       this.tarjetas = x;
       this.tarjetas.sort(fieldSorter(['-tr', '-ta']));
     });
   }
-  displayedColumns = ['jugador', 'ta', 'tr'];
-  @Input()
-  public tarjetas$: Observable<Tarjetas[]> | undefined;
-  public tarjetas: Tarjetas[] = [];
 }
 
 const matModules = [MatTableModule];

@@ -14,6 +14,7 @@ export class GoleadoresComponent implements OnInit {
   @Input()
   public goleadores$: Observable<Goleador[]> | undefined;
   public goleadores: Goleador[] = [];
+  public displayedColumns = ['jugador', 'goles'];
 
   ngOnInit(): void {
     this.goleadores$?.subscribe(async (x) => {
@@ -21,7 +22,6 @@ export class GoleadoresComponent implements OnInit {
       this.goleadores.sort(fieldSorter(['-goles']));
     });
   }
-  displayedColumns = ['jugador', 'goles'];
 }
 
 const matModules = [MatTableModule];

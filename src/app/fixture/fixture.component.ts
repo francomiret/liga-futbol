@@ -6,8 +6,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Observable } from 'rxjs/internal/Observable';
-import { equipos, fechas, canchas, partidos } from 'src/models/test-data';
-import { Fecha, Fixture, Partido } from 'src/models/torneo';
+import { Fixture } from 'src/models/torneo';
 import { fieldSorter } from '../torneo/torneo-utilities';
 
 @Component({
@@ -19,8 +18,8 @@ export class FixtureComponent implements OnInit {
   @Input()
   public fixture$!: Observable<Fixture[]>;
   public fixture: Fixture[] = [];
-
   public fechaActualId: number = 0;
+
   ngOnInit(): void {
     this.fixture$.subscribe((x) => {
       this.fixture = x;
@@ -30,6 +29,7 @@ export class FixtureComponent implements OnInit {
       console.log(this.fechaActualId);
     });
   }
+
   public getResultadoPartido(golesLocal: string[], golesVisitante: string[]) {
     return `${golesLocal.length} - ${golesVisitante.length}`;
   }

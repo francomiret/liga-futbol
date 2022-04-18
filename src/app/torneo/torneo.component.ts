@@ -9,13 +9,10 @@ import { ClubModule } from '../club/club.component';
 import { FixtureModule } from '../fixture/fixture.component';
 import { GoleadoresModule } from '../goleadores/goleadores.component';
 import { TarjetasModule } from '../tarjetas/tarjetas.component';
-import { FirebaseService } from '../firebase.service';
 import {
   Equipo,
   Fixture,
   Goleador,
-  Jugador,
-  Partido,
   Posicion,
   Tarjetas,
 } from 'src/models/torneo';

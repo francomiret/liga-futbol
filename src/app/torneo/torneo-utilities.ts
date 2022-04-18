@@ -1,11 +1,4 @@
-import {
-  Cancha,
-  Equipo,
-  Jugador,
-  Partido,
-  PartidoFixture,
-  Posicion,
-} from 'src/models/torneo';
+import { Cancha, Equipo, Jugador, Partido, Posicion } from 'src/models/torneo';
 
 export function getGoleadores(partidos: Partido[]) {
   const allGoleadores: string[] = [];
