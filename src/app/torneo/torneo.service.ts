@@ -75,17 +75,21 @@ export class TorneoService {
                           let jugadorId = jugadoresId[i];
                           const jugador: Jugador = {
                             ...getJugador(jugadorId, eq.jugadores),
-                            goles: getGoleadores(
-                              partidos.map((x) => x.payload.doc.data())
-                            )[jugadorId],
-                            ta: obtainYellowCards(
-                              partidos.map((x) => x.payload.doc.data())
-                            )[jugadorId],
-                            tr: obtainRedCards(
-                              partidos.map((x) => x.payload.doc.data())
-                            )[jugadorId],
+                            goles:
+                              getGoleadores(
+                                partidos.map((x) => x.payload.doc.data())
+                              )[jugadorId] ?? 0,
+                            ta:
+                              obtainYellowCards(
+                                partidos.map((x) => x.payload.doc.data())
+                              )[jugadorId] ?? 0,
+                            tr:
+                              obtainRedCards(
+                                partidos.map((x) => x.payload.doc.data())
+                              )[jugadorId] ?? 0,
                           };
                           jugadores.push(jugador);
+                          jugadores.sort(fieldSorter(['nombre']));
                         }
                         equipo = { ...equipo, jugadores };
                         return equipo;
