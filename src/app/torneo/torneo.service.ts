@@ -13,6 +13,7 @@ import {
 import { FirebaseService } from '../firebase.service';
 import {
   esEmpate,
+  fieldSorter,
   ganoLocal,
   ganoVisitante,
   getCanchaLocale,
@@ -92,6 +93,7 @@ export class TorneoService {
                     )
                     .subscribe((equipo) => {
                       this.clubes.push(equipo);
+                      this.clubes.sort(fieldSorter(['nombre']));
                     });
                 })
               )
