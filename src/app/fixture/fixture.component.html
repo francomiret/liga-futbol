@@ -8,23 +8,16 @@
     <mat-card style="margin-bottom: 5px">
       <mat-card-title>Fecha {{ fecha.id }} </mat-card-title>
       <mat-card-subtitle>
-        <strong>{{ fecha.fecha }}</strong> |
-        {{ getClubName(fecha.equipoOrganizadorId) }} |
-        {{ getCanchaLocale(fecha.canchaId) }}
+        <strong>{{ fecha.fecha }}</strong> | {{ fecha.clubOrganizadorNombre }} |
+        {{ fecha.canchaLocalidad }}
       </mat-card-subtitle>
       <mat-card-content>
-        <mat-grid-list
-          *ngFor="let partido of getPartidos(fecha.partidos)"
-          cols="12"
-        >
+        <mat-grid-list *ngFor="let partido of fecha.partidos" cols="12">
           <mat-grid-tile [colspan]="1">
-            <img
-              style="width: 100%"
-              [src]="getClubImage(partido.equipoLocalId)"
-            />
+            <img style="width: 100%" [src]="partido.imagenLocal" />
           </mat-grid-tile>
           <mat-grid-tile [colspan]="4">
-            {{ getClubName(partido.equipoLocalId) }}</mat-grid-tile
+            {{ partido.nombreLocal }}</mat-grid-tile
           >
           <mat-grid-tile [colspan]="2">
             <strong *ngIf="partido.jugado; else horario">{{
@@ -38,13 +31,10 @@
             </ng-template>
           </mat-grid-tile>
           <mat-grid-tile [colspan]="4">
-            {{ getClubName(partido.equipoVisitanteId) }}</mat-grid-tile
+            {{ partido.nombreVisitante }}</mat-grid-tile
           >
           <mat-grid-tile [colspan]="1">
-            <img
-              style="width: 100%"
-              [src]="getClubImage(partido.equipoVisitanteId)"
-            />
+            <img style="width: 100%" [src]="partido.imagenVisitante" />
           </mat-grid-tile>
           <mat-divider></mat-divider>
         </mat-grid-list>

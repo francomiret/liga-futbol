@@ -79,3 +79,19 @@ export interface Posicion {
   puntos: number;
   ultimosCinco?: number[];
 }
+
+export interface PartidoFixture extends Partido {
+  imagenLocal: string;
+  imagenVisitante: string;
+  nombreLocal: string;
+  nombreVisitante: string;
+}
+
+export interface Fixture {
+  id: number;
+  fecha: string;
+  clubOrganizadorNombre: string;
+  canchaLocalidad: string;
+  partidos: PartidoFixture[];
+  jugada: boolean;
+}

@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map, switchMap, take, tap } from 'rxjs/operators';
+import { partidos } from 'src/models/test-data';
 import {
   Equipo,
+  Fixture,
   Goleador,
   Jugador,
+  PartidoFixture,
   Posicion,
   Tarjetas,
 } from 'src/models/torneo';
@@ -13,6 +16,9 @@ import {
   esEmpate,
   ganoLocal,
   ganoVisitante,
+  getCanchaLocale,
+  getClubImage,
+  getClubName,
   getDiferenciaDeGol,
   getEquipoJugador,
   getGoleadores,
@@ -20,6 +26,7 @@ import {
   getJugador,
   getJugadoresId,
   getJugadorName,
+  getPartidosByIds,
   getPuntos,
   obtainRedCards,
   obtainYellowCards,
@@ -33,6 +40,7 @@ export class TorneoService {
   public tarjetas: Observable<Tarjetas[]>;
   public posiciones: Observable<Posicion[]>;
   public goleadores: Observable<Goleador[]>;
+  public fixture: Observable<Fixture[]>;
 
   constructor(private service: FirebaseService) {
     /**
@@ -80,7 +88,6 @@ export class TorneoService {
                           jugadores.push(jugador);
                         }
                         equipo = { ...equipo, jugadores };
-                        console.log(equipo);
                         return equipo;
                       })
                     )
@@ -220,6 +227,57 @@ export class TorneoService {
               };
               return posicion;
             });
+          })
+        );
+      })
+    );
+    /**
+     * Obtener fixture
+     */
+    this.fixture = this.service.getPartidos().pipe(
+      switchMap((par) => {
+        const partidos = par.map((x) => x.payload.doc.data());
+        return this.service.getEquipos().pipe(
+          switchMap((eq) => {
+            const equipos = eq.map((x) => x.payload.doc.data());
+            return this.service.getCanchas().pipe(
+              switchMap((can) => {
+                const canchas = can.map((x) => x.payload.doc.data());
+                return this.service.getFechas().pipe(
+                  map((fe) => {
+                    const fechas = fe.map((x) => x.payload.doc.data());
+                    let fecha: Fixture;
+                    return fechas.map((fech) => {
+                      const nuevosPartidos: PartidoFixture[] = [];
+                      getPartidosByIds(fech.partidos, partidos).forEach((x) => {
+                        nuevosPartidos.push({
+                          ...x,
+                          imagenLocal:
+                            getClubImage(x.equipoLocalId, equipos) ?? '',
+                          imagenVisitante:
+                            getClubImage(x.equipoVisitanteId, equipos) ?? '',
+                          nombreLocal:
+                            getClubName(x.equipoLocalId, equipos) ?? '',
+                          nombreVisitante:
+                            getClubName(x.equipoVisitanteId, equipos) ?? '',
+                        } as unknown as PartidoFixture);
+                      });
+                      fecha = {
+                        jugada: fech.jugada,
+                        id: parseInt(fech.id),
+                        canchaLocalidad:
+                          getCanchaLocale(fech.canchaId, canchas) ?? '',
+                        clubOrganizadorNombre:
+                          getClubName(fech.equipoOrganizadorId, equipos) ?? '',
+                        fecha: fech.fecha,
+                        partidos: nuevosPartidos,
+                      };
+                      return fecha;
+                    });
+                  })
+                );
+              })
+            );
           })
         );
       })

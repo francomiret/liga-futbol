@@ -1,4 +1,11 @@
-import { Equipo, Jugador, Partido, Posicion } from 'src/models/torneo';
+import {
+  Cancha,
+  Equipo,
+  Jugador,
+  Partido,
+  PartidoFixture,
+  Posicion,
+} from 'src/models/torneo';
 
 export function getGoleadores(partidos: Partido[]) {
   const allGoleadores: string[] = [];
@@ -109,4 +116,27 @@ export function getPuntos(tabla: Posicion): number {
 
 export function getDiferenciaDeGol(tabla: Posicion): number {
   return tabla.gf - tabla.gc;
+}
+
+export function getClubName(id: string, equipos: Equipo[]) {
+  return equipos.find((x) => x.id === id)?.nombre;
+}
+
+export function getClubImage(id: string, equipos: Equipo[]) {
+  return equipos.find((x) => x.id === id)?.imagen;
+}
+
+export function getCanchaLocale(id: string, canchas: Cancha[]) {
+  return canchas.find((x) => x.id === id)?.localidad;
+}
+
+export function getPartidosByIds(partidosId: string[], partidos: Partido[]) {
+  const nuevosPartidos: Partido[] = [];
+  partidosId.forEach((partidoId) => {
+    const partido = partidos.find((x) => x.id === partidoId);
+    if (partido) {
+      nuevosPartidos.push(partido);
+    }
+  });
+  return nuevosPartidos;
 }

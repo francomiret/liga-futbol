@@ -12,6 +12,7 @@ import { TarjetasModule } from '../tarjetas/tarjetas.component';
 import { FirebaseService } from '../firebase.service';
 import {
   Equipo,
+  Fixture,
   Goleador,
   Jugador,
   Partido,
@@ -31,12 +32,14 @@ export class TorneoComponent {
   public tarjetas: Observable<Tarjetas[]>;
   public goleadores: Observable<Goleador[]>;
   public posiciones: Observable<Posicion[]>;
+  public fixture: Observable<Fixture[]>;
 
   constructor(private torneoService: TorneoService) {
     this.clubes = this.torneoService.clubes;
     this.tarjetas = this.torneoService.tarjetas;
     this.goleadores = this.torneoService.goleadores;
     this.posiciones = this.torneoService.posiciones;
+    this.fixture = this.torneoService.fixture;
   }
 }
 
