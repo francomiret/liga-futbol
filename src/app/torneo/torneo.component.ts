@@ -18,6 +18,7 @@ import {
 } from 'src/models/torneo';
 import { Observable } from 'rxjs';
 import { TorneoService } from './torneo.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-torneo',
@@ -40,7 +41,12 @@ export class TorneoComponent {
   }
 }
 
-const matModules = [MatToolbarModule, MatTabsModule, MatCardModule];
+const matModules = [
+  MatToolbarModule,
+  MatTabsModule,
+  MatCardModule,
+  MatProgressSpinnerModule,
+];
 
 @NgModule({
   declarations: [TorneoComponent],

@@ -26,7 +26,6 @@ export class FixtureComponent implements OnInit {
       this.fixture.sort(fieldSorter(['id']));
       this.fechaActualId =
         Number(this.fixture.find((x) => x.jugada === false)?.id) - 1 ?? 1;
-      console.log(this.fechaActualId);
     });
   }
 
