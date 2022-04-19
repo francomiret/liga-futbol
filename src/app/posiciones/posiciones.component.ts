@@ -1,21 +1,45 @@
-import { Component, Input, NgModule, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  NgModule,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { Posicion } from 'src/models/torneo';
-import { Observable } from 'rxjs/internal/Observable';
-import { fieldSorter } from '../torneo/torneo-utilities';
+import { Equipo, Partido, Posicion } from 'src/models/torneo';
+import {
+  esEmpate,
+  fieldSorter,
+  ganoLocal,
+  ganoVisitante,
+  getDiferenciaDeGol,
+  getPuntos,
+} from '../torneo/torneo-utilities';
 
 @Component({
   selector: 'app-posiciones',
   templateUrl: './posiciones.component.html',
   styleUrls: ['./posiciones.component.scss'],
 })
-export class PosicionesComponent implements OnInit {
+export class PosicionesComponent implements OnChanges {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.partidos || changes.equipos) {
+      this.initialize(
+        changes.partidos.currentValue,
+        changes.equipos.currentValue
+      );
+    }
+  }
+
   @Input()
-  public posiciones$!: Observable<Posicion[]>;
+  public partidos: Partido[] = [];
+  @Input()
+  public equipos: Equipo[] = [];
+
   public posiciones: Posicion[] = [];
   public displayedColumns = [
     'club',
@@ -29,11 +53,83 @@ export class PosicionesComponent implements OnInit {
     'dg',
   ];
 
-  ngOnInit(): void {
-    this.posiciones$.subscribe((x) => {
-      this.posiciones = x;
-      this.posiciones.sort(fieldSorter(['-puntos', '-dg']));
+  private initialize(partidos: Partido[], equipos: Equipo[]) {
+    equipos.forEach((equipo) => {
+      let posicion: Posicion = {
+        equipo: equipo,
+        e: 0,
+        g: 0,
+        p: 0,
+        gc: 0,
+        gf: 0,
+        pj: 0,
+        dg: 0,
+        puntos: 0,
+      };
+      const partidosLocal = partidos.filter(
+        (x) => x.equipoLocalId === equipo.id && x.jugado === true
+      );
+      const partidosVisitante = partidos.filter(
+        (x) => x.equipoVisitanteId === equipo.id && x.jugado === true
+      );
+
+      partidosLocal.forEach((partido) => {
+        posicion = {
+          ...posicion,
+          gf: posicion.gf + partido.golesLocalId.length,
+          gc: posicion.gc + partido.golesVisitanteId.length,
+          pj: posicion.pj + 1,
+        };
+        if (esEmpate(partido)) {
+          posicion = {
+            ...posicion,
+            e: posicion.e + 1,
+          };
+        } else if (ganoLocal(partido)) {
+          posicion = {
+            ...posicion,
+            g: posicion.g + 1,
+          };
+        } else if (ganoVisitante(partido)) {
+          posicion = {
+            ...posicion,
+            p: posicion.p + 1,
+          };
+        }
+      });
+
+      partidosVisitante.forEach((partido) => {
+        posicion = {
+          ...posicion,
+          gf: posicion.gf + partido.golesVisitanteId.length,
+          gc: posicion.gc + partido.golesLocalId.length,
+          pj: posicion.pj + 1,
+        };
+        if (esEmpate(partido)) {
+          posicion = {
+            ...posicion,
+            e: posicion.e + 1,
+          };
+        } else if (ganoLocal(partido)) {
+          posicion = {
+            ...posicion,
+            p: posicion.p + 1,
+          };
+        } else if (ganoVisitante(partido)) {
+          posicion = {
+            ...posicion,
+            g: posicion.g + 1,
+          };
+        }
+      });
+      posicion = {
+        ...posicion,
+        puntos: getPuntos(posicion),
+        dg: getDiferenciaDeGol(posicion),
+      };
+      this.posiciones.push(posicion);
     });
+    this.posiciones.sort(fieldSorter(['-puntos', '-dg']));
   }
 }
 

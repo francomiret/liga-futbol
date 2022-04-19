@@ -3,14 +3,7 @@ import {
   AngularFirestore,
   DocumentChangeAction,
 } from '@angular/fire/compat/firestore';
-import {
-  Equipo,
-  Torneo,
-  Cancha,
-  Fecha,
-  Partido,
-  Jugador,
-} from 'src/models/torneo';
+import { Equipo, Cancha, Fecha, Partido, Jugador } from 'src/models/torneo';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 
@@ -19,12 +12,6 @@ import { map } from 'rxjs/operators';
 })
 export class FirebaseService {
   constructor(private firestore: AngularFirestore) {}
-
-  public getTorneos() {
-    return this.firestore.collection('torneos').snapshotChanges() as Observable<
-      DocumentChangeAction<Torneo>[]
-    >;
-  }
 
   public getPartidos() {
     return this.firestore
@@ -71,17 +58,5 @@ export class FirebaseService {
         })
       )
     );
-  }
-
-  public getJugador(id: string): Observable<any> {
-    return this.firestore.collection('jugadores').doc(id).snapshotChanges();
-  }
-
-  public getEquipo(id: string): Observable<any> {
-    return this.firestore.collection('equipos').doc(id).snapshotChanges();
-  }
-
-  public getPartido(id: string): Observable<any> {
-    return this.firestore.collection('partidos').doc(id).snapshotChanges();
   }
 }

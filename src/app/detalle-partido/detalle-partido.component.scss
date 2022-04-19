@@ -1,0 +1,31 @@
+mat-grid-tile {
+  height: 200px;
+  text-align: center;
+  display: flex;
+
+  flex-direction: column;
+}
+mat-grid-list {
+  height: 200px;
+  flex-direction: column;
+  display: flex;
+
+  // height: 60px;
+}
+
+.yellow-card {
+  min-height: 22px;
+  min-width: 15px;
+  border: 1px solid;
+  border-radius: 5px;
+  background-color: #ffff00;
+  margin-right: 5px;
+}
+.red-card {
+  min-height: 22px;
+  min-width: 15px;
+  border-radius: 5px;
+  border: 1px solid;
+  background-color: #ff0000;
+  margin-right: 5px;
+}

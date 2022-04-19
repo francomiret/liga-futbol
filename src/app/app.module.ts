@@ -24,6 +24,7 @@ import {
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FirebaseService } from './firebase.service';
+import { MatDialog } from '@angular/material/dialog';
 
 const matModules = [
   MatToolbarModule,
@@ -52,7 +53,12 @@ const matModules = [
     matModules,
   ],
 
-  providers: [ScreenTrackingService, UserTrackingService, FirebaseService],
+  providers: [
+    ScreenTrackingService,
+    UserTrackingService,
+    FirebaseService,
+    MatDialog,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -5,26 +5,46 @@
 >
   <mat-tab>
     <ng-template mat-tab-label> FIXTURE </ng-template>
-    <app-fixture [fixture$]="fixture"></app-fixture>
+    <app-fixture
+      [partidos]="(partidos$ | async) || []"
+      [equipos]="(equipos$ | async) || []"
+      [jugadores]="(jugadores$ | async) || []"
+      [canchas]="(canchas$ | async) || []"
+      [fechas]="(fechas$ | async) || []"
+    ></app-fixture>
   </mat-tab>
 
   <mat-tab>
     <ng-template mat-tab-label> POSICIONES </ng-template>
-    <app-posiciones [posiciones$]="posiciones"></app-posiciones>
+    <app-posiciones
+      [partidos]="(partidos$ | async) || []"
+      [equipos]="(equipos$ | async) || []"
+    ></app-posiciones>
   </mat-tab>
 
   <mat-tab>
     <ng-template mat-tab-label> GOLEADORES </ng-template>
-    <app-goleadores [goleadores$]="goleadores"></app-goleadores>
+    <app-goleadores
+      [partidos]="(partidos$ | async) || []"
+      [equipos]="(equipos$ | async) || []"
+      [jugadores]="(jugadores$ | async) || []"
+    ></app-goleadores>
   </mat-tab>
 
   <mat-tab>
     <ng-template mat-tab-label> TARJETAS </ng-template>
-    <app-tarjetas [tarjetas$]="tarjetas"></app-tarjetas>
+    <app-tarjetas
+      [partidos]="(partidos$ | async) || []"
+      [equipos]="(equipos$ | async) || []"
+      [jugadores]="(jugadores$ | async) || []"
+    ></app-tarjetas>
   </mat-tab>
 
   <mat-tab>
     <ng-template mat-tab-label> CLUBES </ng-template>
-    <app-club [clubes]="clubes"></app-club>
+    <app-club
+      [partidos]="(partidos$ | async) || []"
+      [equipos]="(equipos$ | async) || []"
+    ></app-club>
   </mat-tab>
 </mat-tab-group>

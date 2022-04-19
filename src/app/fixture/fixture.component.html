@@ -12,7 +12,12 @@
         {{ fecha.canchaLocalidad }}
       </mat-card-subtitle>
       <mat-card-content>
-        <mat-grid-list *ngFor="let partido of fecha.partidos" cols="12">
+        <mat-grid-list
+          *ngFor="let partido of fecha.partidos"
+          cols="12"
+          (click)="partidoSeleccionado(partido, fecha)"
+          matRipple
+        >
           <mat-grid-tile [colspan]="1">
             <img style="width: 100%" [src]="partido.imagenLocal" />
           </mat-grid-tile>

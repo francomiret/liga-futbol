@@ -9,16 +9,10 @@ import { ClubModule } from '../club/club.component';
 import { FixtureModule } from '../fixture/fixture.component';
 import { GoleadoresModule } from '../goleadores/goleadores.component';
 import { TarjetasModule } from '../tarjetas/tarjetas.component';
-import {
-  Equipo,
-  Fixture,
-  Goleador,
-  Posicion,
-  Tarjetas,
-} from 'src/models/torneo';
-import { Observable } from 'rxjs';
-import { TorneoService } from './torneo.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TorneoService } from './torneo.service';
+import { Observable } from 'rxjs/internal/Observable';
+import { Cancha, Equipo, Fecha, Jugador, Partido } from 'src/models/torneo';
 
 @Component({
   selector: 'app-torneo',
@@ -26,18 +20,22 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   styleUrls: ['./torneo.component.scss'],
 })
 export class TorneoComponent {
-  public clubes: Equipo[] = [];
-  public tarjetas: Observable<Tarjetas[]>;
-  public goleadores: Observable<Goleador[]>;
-  public posiciones: Observable<Posicion[]>;
-  public fixture: Observable<Fixture[]>;
+  public jugadores$: Observable<Jugador[]>;
 
-  constructor(private torneoService: TorneoService) {
-    this.clubes = this.torneoService.clubes;
-    this.tarjetas = this.torneoService.tarjetas;
-    this.goleadores = this.torneoService.goleadores;
-    this.posiciones = this.torneoService.posiciones;
-    this.fixture = this.torneoService.fixture;
+  public partidos$: Observable<Partido[]>;
+
+  public canchas$: Observable<Cancha[]>;
+
+  public equipos$: Observable<Equipo[]>;
+
+  public fechas$: Observable<Fecha[]>;
+
+  constructor(private service: TorneoService) {
+    this.canchas$ = this.service.canchas$;
+    this.fechas$ = this.service.fechas$;
+    this.equipos$ = this.service.equipos$;
+    this.partidos$ = this.service.partidos$;
+    this.jugadores$ = this.service.jugadores$;
   }
 }
 
