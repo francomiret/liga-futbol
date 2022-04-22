@@ -1,18 +1,22 @@
-<mat-card-content>
+<mat-card-content style="max-height: 550px">
   <mat-grid-list cols="12">
     <mat-grid-tile [colspan]="4">
-      <div style="flex-direction: column">
+      <div style="flex-direction: column; display: flex">
         <img style="width: 100%" [src]="data.partido.imagenLocal" />
         {{ data.partido.nombreLocal }}
       </div>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="4">
-      {{
-        getResultadoPartido(
-          data.partido.golesLocalId,
-          data.partido.golesVisitanteId
-        )
-      }}
+      <h1>
+        <strong>
+          {{
+            getResultadoPartido(
+              data.partido.golesLocalId,
+              data.partido.golesVisitanteId
+            )
+          }}
+        </strong>
+      </h1>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="4">
       <div style="flex-direction: column">
@@ -22,7 +26,9 @@
     </mat-grid-tile>
   </mat-grid-list>
 </mat-card-content>
-<mat-card-subtitle style="display: flex; justify-content: center">
+<mat-card-subtitle
+  style="display: flex; justify-content: center; text-align: center"
+>
   Fecha {{ data.fecha.id }} | {{ data.fecha.fecha }} |
   {{ data.partido.horario }}| {{ data.fecha.canchaLocalidad }}
 </mat-card-subtitle>
@@ -65,7 +71,8 @@
   >
     <mat-list *ngFor="let item of data.partido.golesVisitanteId">
       <mat-list-item>
-        <mat-icon>sports_soccer</mat-icon> {{ getJugadorName(item) }}
+        <mat-icon style="margin-right: 5px">sports_soccer</mat-icon>
+        {{ getJugadorName(item) }}
       </mat-list-item>
     </mat-list>
     <mat-list *ngFor="let item of data.partido.amarillasVisitanteId">

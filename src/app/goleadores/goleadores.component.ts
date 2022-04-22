@@ -36,7 +36,7 @@ export class GoleadoresComponent implements OnChanges {
   public displayedColumns = ['jugador', 'goles'];
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.jugadores || changes.partidos || changes.equipos) {
+    if (changes.jugadores && changes.partidos && changes.equipos) {
       this.initialize(
         changes.partidos.currentValue,
         changes.equipos.currentValue,

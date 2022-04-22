@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { Cancha, Equipo, Fecha, Jugador, Partido } from 'src/models/torneo';
@@ -13,26 +14,20 @@ export class TorneoService {
   public canchas$: Observable<Cancha[]>;
   public equipos$: Observable<Equipo[]>;
   public fechas$: Observable<Fecha[]>;
+  public torneos$: Observable<any[]>;
 
   constructor(private service: FirebaseService) {
-    this.jugadores$ = this.service
-      .getJugadores()
+    this.jugadores$ = of([]);
+    this.torneos$ = this.service
+      .getTorneos()
       .pipe(map((x) => x.map((x) => x.payload.doc.data())));
 
-    this.fechas$ = this.service
-      .getFechas()
-      .pipe(map((x) => x.map((x) => x.payload.doc.data())));
+    this.fechas$ = of([]);
 
-    this.equipos$ = this.service
-      .getEquipos()
-      .pipe(map((x) => x.map((x) => x.payload.doc.data())));
+    this.equipos$ = of([]);
 
-    this.canchas$ = this.service
-      .getCanchas()
-      .pipe(map((x) => x.map((x) => x.payload.doc.data())));
+    this.canchas$ = of([]);
 
-    this.partidos$ = this.service
-      .getPartidos()
-      .pipe(map((x) => x.map((x) => x.payload.doc.data())));
+    this.partidos$ = of([]);
   }
 }

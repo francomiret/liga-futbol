@@ -11,36 +11,12 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class FirebaseService {
-  constructor(private firestore: AngularFirestore) {}
-
-  public getPartidos() {
-    return this.firestore
-      .collection('partidos')
-      .snapshotChanges() as Observable<DocumentChangeAction<Partido>[]>;
+  constructor(private firestore: AngularFirestore) {
+    this.getTorneos();
   }
 
-  public getFechas() {
-    return this.firestore.collection('fechas').snapshotChanges() as Observable<
-      DocumentChangeAction<Fecha>[]
-    >;
-  }
-
-  public getCanchas() {
-    return this.firestore.collection('canchas').snapshotChanges() as Observable<
-      DocumentChangeAction<Cancha>[]
-    >;
-  }
-
-  public getJugadores() {
-    return this.firestore
-      .collection('jugadores')
-      .snapshotChanges() as Observable<DocumentChangeAction<Jugador>[]>;
-  }
-
-  public getEquipos() {
-    return this.firestore.collection('equipos').snapshotChanges() as Observable<
-      DocumentChangeAction<Equipo>[]
-    >;
+  public getTorneos() {
+    return this.firestore.collection('torneos').snapshotChanges();
   }
 
   public getJugadoresDeUnEquipo(equipoId: string) {

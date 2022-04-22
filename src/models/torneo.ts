@@ -10,7 +10,7 @@ export interface Fecha {
   fecha: string;
   equipoOrganizadorId: string;
   canchaId: string;
-  partidos: string[];
+  partidos: Partido[];
 }
 
 export interface Partido {

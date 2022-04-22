@@ -29,6 +29,8 @@ export class TorneoComponent {
   public equipos$: Observable<Equipo[]>;
 
   public fechas$: Observable<Fecha[]>;
+  
+  public torneos$: Observable<any[]>;
 
   constructor(private service: TorneoService) {
     this.canchas$ = this.service.canchas$;
@@ -36,6 +38,7 @@ export class TorneoComponent {
     this.equipos$ = this.service.equipos$;
     this.partidos$ = this.service.partidos$;
     this.jugadores$ = this.service.jugadores$;
+    this.torneos$ = this.service.torneos$;
   }
 }
 

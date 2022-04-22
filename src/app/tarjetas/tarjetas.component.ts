@@ -44,7 +44,7 @@ export class TarjetasComponent implements OnChanges {
   public displayedColumns = ['jugador', 'ta', 'tr'];
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.jugadores || changes.partidos || changes.equipos) {
+    if (changes.jugadores && changes.partidos && changes.equipos) {
       this.initialize(
         changes.partidos.currentValue,
         changes.equipos.currentValue,

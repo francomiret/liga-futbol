@@ -18,6 +18,7 @@ import {
   getGoleadores,
   getJugador,
   getJugadoresId,
+  getTodosLosPartidos,
   obtainRedCards,
   obtainYellowCards,
 } from '../torneo/torneo-utilities';
@@ -28,6 +29,7 @@ import {
   styleUrls: ['./club.component.scss'],
 })
 export class ClubesComponent implements OnChanges {
+  torneo: any;
   constructor(private service: FirebaseService) {}
 
   @Input()
@@ -35,6 +37,8 @@ export class ClubesComponent implements OnChanges {
 
   @Input()
   public equipos: Equipo[] = [];
+  @Input()
+  public torneos: any[] = [];
 
   public clubes: Equipo[] = [];
 
@@ -43,47 +47,32 @@ export class ClubesComponent implements OnChanges {
   public displayedColumns = ['jugador', 'goles', 'ta', 'tr'];
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.partidos || changes.equipos) {
+    if (changes?.torneos?.currentValue?.length !== 0) {
       this.initialize(
-        changes.partidos.currentValue,
-        changes.equipos.currentValue
+        getTodosLosPartidos(changes.torneos.currentValue[0].fechas),
+        changes.torneos.currentValue[0].equipos
       );
     }
   }
 
   private initialize(partidos: Partido[], equipos: Equipo[]) {
     equipos.forEach((equipo) => {
-      this.service
-        .getJugadoresDeUnEquipo(equipo.id)
-        .pipe(
-          map((x) => ({
-            ...equipo,
-            jugadores: x,
-          })),
-          map((equipo) => {
-            const jugadores = [];
-            const jugadoresId = [
-              ...new Set([...getJugadoresId(equipo.id, equipo.jugadores)]),
-            ];
-            for (let i = 0; i < jugadoresId.length; i++) {
-              let jugadorId = jugadoresId[i];
-              const jugador: Jugador = {
-                ...getJugador(jugadorId, equipo.jugadores),
-                goles: getGoleadores(partidos)[jugadorId] ?? 0,
-                ta: obtainYellowCards(partidos)[jugadorId] ?? 0,
-                tr: obtainRedCards(partidos)[jugadorId] ?? 0,
-              };
-              jugadores.push(jugador);
-              jugadores.sort(fieldSorter(['nombre']));
-            }
-            equipo = { ...equipo, jugadores };
-            return equipo;
-          })
-        )
-        .subscribe((equipo) => {
-          this.clubes.push(equipo);
-          this.clubes.sort(fieldSorter(['nombre']));
-        });
+      const jugadores = [];
+      const jugadoresId = [...equipo.jugadores.map((x) => x.id)];
+      for (let i = 0; i < jugadoresId.length; i++) {
+        let jugadorId = jugadoresId[i];
+        const jugador: Jugador = {
+          ...getJugador(jugadorId, equipo.jugadores),
+          goles: getGoleadores(partidos)[jugadorId] ?? 0,
+          ta: obtainYellowCards(partidos)[jugadorId] ?? 0,
+          tr: obtainRedCards(partidos)[jugadorId] ?? 0,
+        };
+        jugadores.push(jugador);
+        jugadores.sort(fieldSorter(['nombre']));
+      }
+      equipo = { ...equipo, jugadores };
+      this.clubes.push(equipo);
+      this.clubes.sort(fieldSorter(['nombre']));
     });
   }
 }

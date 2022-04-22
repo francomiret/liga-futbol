@@ -1,4 +1,11 @@
-import { Cancha, Equipo, Jugador, Partido, Posicion } from 'src/models/torneo';
+import {
+  Cancha,
+  Equipo,
+  Fecha,
+  Jugador,
+  Partido,
+  Posicion,
+} from 'src/models/torneo';
 
 export function getGoleadores(partidos: Partido[]) {
   const allGoleadores: string[] = [];
@@ -132,4 +139,20 @@ export function getPartidosByIds(partidosId: string[], partidos: Partido[]) {
     }
   });
   return nuevosPartidos;
+}
+
+export function getTodosLosJugadores(equipos: Equipo[]) {
+  const jugadores: Jugador[] = [];
+  equipos.forEach((equipo) => {
+    jugadores.push(...equipo.jugadores);
+  });
+  return jugadores;
+}
+
+export function getTodosLosPartidos(fechas: Fecha[]) {
+  const partidos: Partido[] = [];
+  fechas.forEach((fecha) => {
+    partidos.push(...fecha.partidos);
+  });
+  return partidos;
 }

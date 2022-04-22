@@ -27,7 +27,7 @@ import {
 })
 export class PosicionesComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.partidos || changes.equipos) {
+    if (changes.partidos && changes.equipos) {
       this.initialize(
         changes.partidos.currentValue,
         changes.equipos.currentValue

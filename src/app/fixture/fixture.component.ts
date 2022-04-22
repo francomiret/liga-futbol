@@ -28,6 +28,7 @@ import {
   getClubImage,
   getClubName,
   getPartidosByIds,
+  getTodosLosJugadores,
 } from '../torneo/torneo-utilities';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRippleModule } from '@angular/material/core';
@@ -54,57 +55,44 @@ export class FixtureComponent implements OnChanges {
 
   @Input()
   public fechas: Fecha[] = [];
+  @Input()
+  public torneos: any[] = [];
 
   public fechaActualId: number = 0;
 
   public fixture: Fixture[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (
-      changes.jugadores ||
-      changes.partidos ||
-      changes.fechas ||
-      changes.equipos ||
-      changes.canchas
-    ) {
+    if (changes.torneos?.currentValue.length !== 0) {
       this.initialize(
-        changes.partidos.currentValue,
-        changes.equipos.currentValue,
-        changes.canchas.currentValue,
-        changes.fechas.currentValue
+        changes.torneos.currentValue[0].equipos,
+        changes.torneos.currentValue[0].canchas,
+        changes.torneos.currentValue[0].fechas
       );
     }
   }
 
-  private initialize(
-    partidos: Partido[],
-    equipos: Equipo[],
-    canchas: Cancha[],
-    fechas: Fecha[]
-  ) {
-    let fecha: Fixture;
-    fechas.forEach((fech) => {
-      const nuevosPartidos: PartidoFixture[] = [];
-      getPartidosByIds(fech.partidos, partidos).forEach((x) => {
-        nuevosPartidos.push({
-          ...x,
-          imagenLocal: getClubImage(x.equipoLocalId, equipos) ?? '',
-          imagenVisitante: getClubImage(x.equipoVisitanteId, equipos) ?? '',
-          nombreLocal: getClubName(x.equipoLocalId, equipos) ?? '',
-          nombreVisitante: getClubName(x.equipoVisitanteId, equipos) ?? '',
-        });
-      });
-      fecha = {
-        jugada: fech.jugada,
-        id: parseInt(fech.id),
-        canchaLocalidad: getCanchaLocale(fech.canchaId, canchas) ?? '',
-        clubOrganizadorNombre:
-          getClubName(fech.equipoOrganizadorId, equipos) ?? '',
-        fecha: fech.fecha,
-        partidos: nuevosPartidos,
-      };
-      this.fixture.push(fecha);
-    });
+  private initialize(equipos: Equipo[], canchas: Cancha[], fechas: Fecha[]) {
+    this.fixture = fechas.map(
+      (x) =>
+        ({
+          id: parseInt(x.id),
+          fecha: x.fecha,
+          jugada: x.jugada,
+          partidos: x.partidos.map((partido: any) => ({
+            ...(partido as unknown as PartidoFixture),
+            imagenLocal: getClubImage(partido.equipoLocalId, equipos) ?? '',
+            imagenVisitante:
+              getClubImage(partido.equipoVisitanteId, equipos) ?? '',
+            nombreLocal: getClubName(partido.equipoLocalId, equipos) ?? '',
+            nombreVisitante:
+              getClubName(partido.equipoVisitanteId, equipos) ?? '',
+          })),
+          canchaLocalidad: getCanchaLocale(x.canchaId, canchas) ?? '',
+          clubOrganizadorNombre:
+            getClubName(x.equipoOrganizadorId, equipos) ?? '',
+        } as unknown as Fixture)
+    );
     this.fixture.sort(fieldSorter(['id']));
     this.fechaActualId =
       Number(this.fixture.find((x) => x.jugada === false)?.id) - 1 ?? 1;
@@ -119,7 +107,7 @@ export class FixtureComponent implements OnChanges {
       this.dialog.open(DetallePartidoComponent, {
         data: {
           partido,
-          jugadores: this.jugadores,
+          jugadores: getTodosLosJugadores(this.torneos[0].equipos),
           fecha,
         },
       });
