@@ -2,6 +2,8 @@ export interface Torneo {
   id: string;
   nombre: string;
   fechas: Fecha[];
+  equipos: Equipo[];
+  canchas: Cancha[];
 }
 
 export interface Fecha {

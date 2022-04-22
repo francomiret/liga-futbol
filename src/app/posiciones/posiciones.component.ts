@@ -10,7 +10,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { Equipo, Partido, Posicion } from 'src/models/torneo';
+import { Equipo, Partido, Posicion, Torneo } from 'src/models/torneo';
 import {
   esEmpate,
   fieldSorter,
@@ -18,6 +18,7 @@ import {
   ganoVisitante,
   getDiferenciaDeGol,
   getPuntos,
+  getTodosLosPartidos,
 } from '../torneo/torneo-utilities';
 
 @Component({
@@ -27,18 +28,16 @@ import {
 })
 export class PosicionesComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.partidos && changes.equipos) {
+    if (changes?.torneos?.currentValue?.length !== 0) {
       this.initialize(
-        changes.partidos.currentValue,
-        changes.equipos.currentValue
+        getTodosLosPartidos(changes.torneos.currentValue[0].fechas),
+        changes.torneos.currentValue[0].equipos
       );
     }
   }
 
   @Input()
-  public partidos: Partido[] = [];
-  @Input()
-  public equipos: Equipo[] = [];
+  public torneos: Torneo[] = [];
 
   public posiciones: Posicion[] = [];
   public displayedColumns = [
@@ -127,7 +126,7 @@ export class PosicionesComponent implements OnChanges {
         puntos: getPuntos(posicion),
         dg: getDiferenciaDeGol(posicion),
       };
-      this.posiciones.push(posicion);
+      this.posiciones = [...this.posiciones, posicion];
     });
     this.posiciones.sort(fieldSorter(['-puntos', '-dg']));
   }

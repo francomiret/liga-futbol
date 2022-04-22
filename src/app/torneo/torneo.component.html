@@ -10,36 +10,21 @@
 
   <mat-tab>
     <ng-template mat-tab-label> POSICIONES </ng-template>
-    <app-posiciones
-      [partidos]="(partidos$ | async) || []"
-      [equipos]="(equipos$ | async) || []"
-    ></app-posiciones>
+    <app-posiciones [torneos]="(torneos$ | async) || []"></app-posiciones>
   </mat-tab>
 
   <mat-tab>
     <ng-template mat-tab-label> GOLEADORES </ng-template>
-    <app-goleadores
-      [partidos]="(partidos$ | async) || []"
-      [equipos]="(equipos$ | async) || []"
-      [jugadores]="(jugadores$ | async) || []"
-    ></app-goleadores>
+    <app-goleadores [torneos]="(torneos$ | async) || []"></app-goleadores>
   </mat-tab>
 
   <mat-tab>
     <ng-template mat-tab-label> TARJETAS </ng-template>
-    <app-tarjetas
-      [partidos]="(partidos$ | async) || []"
-      [equipos]="(equipos$ | async) || []"
-      [jugadores]="(jugadores$ | async) || []"
-    ></app-tarjetas>
+    <app-tarjetas [torneos]="(torneos$ | async) || []"></app-tarjetas>
   </mat-tab>
 
   <mat-tab>
     <ng-template mat-tab-label> CLUBES </ng-template>
-    <app-club
-      [partidos]="(partidos$ | async) || []"
-      [equipos]="(equipos$ | async) || []"
-      [torneos]="(torneos$ | async) || []"
-    ></app-club>
+    <app-club [torneos]="(torneos$ | async) || []"></app-club>
   </mat-tab>
 </mat-tab-group>

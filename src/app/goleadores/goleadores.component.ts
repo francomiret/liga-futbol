@@ -7,13 +7,15 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { Equipo, Goleador, Jugador, Partido } from 'src/models/torneo';
+import { Equipo, Goleador, Jugador, Partido, Torneo } from 'src/models/torneo';
 import {
   fieldSorter,
   getEquipoJugador,
   getGoleadores,
   getImagenEquipoJugador,
   getJugadorName,
+  getTodosLosJugadores,
+  getTodosLosPartidos,
 } from '../torneo/torneo-utilities';
 
 @Component({
@@ -23,24 +25,18 @@ import {
 })
 export class GoleadoresComponent implements OnChanges {
   @Input()
-  public jugadores: Jugador[] = [];
-
-  @Input()
-  public partidos: Partido[] = [];
-
-  @Input()
-  public equipos: Equipo[] = [];
+  public torneos: Torneo[] = [];
 
   public goleadores: Goleador[] = [];
 
   public displayedColumns = ['jugador', 'goles'];
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.jugadores && changes.partidos && changes.equipos) {
+    if (changes?.torneos?.currentValue?.length !== 0) {
       this.initialize(
-        changes.partidos.currentValue,
-        changes.equipos.currentValue,
-        changes.jugadores.currentValue
+        getTodosLosPartidos(changes.torneos.currentValue[0].fechas),
+        changes.torneos.currentValue[0].equipos,
+        getTodosLosJugadores(changes.torneos.currentValue[0].equipos)
       );
     }
   }
@@ -66,7 +62,7 @@ export class GoleadoresComponent implements OnChanges {
         imagen: getImagenEquipoJugador(jugadorId, equipos, jugadores),
         goles: getGoleadores(partidos)[jugadorId],
       };
-      this.goleadores.push(goleador);
+      this.goleadores = [...this.goleadores, goleador];
     });
     this.goleadores.sort(fieldSorter(['-goles']));
   }

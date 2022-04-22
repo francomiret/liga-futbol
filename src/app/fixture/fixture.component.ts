@@ -20,6 +20,7 @@ import {
   Jugador,
   Partido,
   PartidoFixture,
+  Torneo,
 } from 'src/models/torneo';
 import { DetallePartidoComponent } from '../detalle-partido/detalle-partido.component';
 import {
@@ -40,23 +41,8 @@ import { MatRippleModule } from '@angular/material/core';
 })
 export class FixtureComponent implements OnChanges {
   constructor(public dialog: MatDialog) {}
-
   @Input()
-  public jugadores: Jugador[] = [];
-
-  @Input()
-  public partidos: Partido[] = [];
-
-  @Input()
-  public equipos: Equipo[] = [];
-
-  @Input()
-  public canchas: Cancha[] = [];
-
-  @Input()
-  public fechas: Fecha[] = [];
-  @Input()
-  public torneos: any[] = [];
+  public torneos: Torneo[] = [];
 
   public fechaActualId: number = 0;
 

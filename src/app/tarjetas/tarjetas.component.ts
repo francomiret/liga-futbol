@@ -7,12 +7,14 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { Equipo, Jugador, Partido } from 'src/models/torneo';
+import { Equipo, Jugador, Partido, Torneo } from 'src/models/torneo';
 import {
   fieldSorter,
   getEquipoJugador,
   getImagenEquipoJugador,
   getJugadorName,
+  getTodosLosJugadores,
+  getTodosLosPartidos,
   obtainRedCards,
   obtainYellowCards,
 } from '../torneo/torneo-utilities';
@@ -31,24 +33,18 @@ interface Tarjetas {
 })
 export class TarjetasComponent implements OnChanges {
   @Input()
-  public jugadores: Jugador[] = [];
-
-  @Input()
-  public partidos: Partido[] = [];
-
-  @Input()
-  public equipos: Equipo[] = [];
+  public torneos: Torneo[] = [];
 
   public tarjetas: Tarjetas[] = [];
 
   public displayedColumns = ['jugador', 'ta', 'tr'];
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.jugadores && changes.partidos && changes.equipos) {
+    if (changes?.torneos?.currentValue?.length !== 0) {
       this.initialize(
-        changes.partidos.currentValue,
-        changes.equipos.currentValue,
-        changes.jugadores.currentValue
+        getTodosLosPartidos(changes.torneos.currentValue[0].fechas),
+        changes.torneos.currentValue[0].equipos,
+        getTodosLosJugadores(changes.torneos.currentValue[0].equipos)
       );
     }
   }
@@ -73,7 +69,7 @@ export class TarjetasComponent implements OnChanges {
         ta: obtainYellowCards(partidos)[jugadorId] ?? 0,
         tr: obtainRedCards(partidos)[jugadorId] ?? 0,
       };
-      this.tarjetas.push(jugador);
+      this.tarjetas = [...this.tarjetas, jugador];
     });
     this.tarjetas.sort(fieldSorter(['-tr', '-ta']));
   }

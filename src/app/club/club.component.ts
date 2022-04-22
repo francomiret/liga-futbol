@@ -9,7 +9,7 @@ import {
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
-import { Equipo, Jugador, Partido } from 'src/models/torneo';
+import { Equipo, Jugador, Partido, Torneo } from 'src/models/torneo';
 import { MatIconModule } from '@angular/material/icon';
 import { FirebaseService } from '../firebase.service';
 import { map } from 'rxjs/operators';
@@ -29,16 +29,10 @@ import {
   styleUrls: ['./club.component.scss'],
 })
 export class ClubesComponent implements OnChanges {
-  torneo: any;
   constructor(private service: FirebaseService) {}
-
+  
   @Input()
-  public partidos: Partido[] = [];
-
-  @Input()
-  public equipos: Equipo[] = [];
-  @Input()
-  public torneos: any[] = [];
+  public torneos: Torneo[] = [];
 
   public clubes: Equipo[] = [];
 
