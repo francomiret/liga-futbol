@@ -17,8 +17,6 @@ import {
   Equipo,
   Fecha,
   Fixture,
-  Jugador,
-  Partido,
   PartidoFixture,
   Torneo,
 } from 'src/models/torneo';
@@ -28,7 +26,6 @@ import {
   getCanchaLocale,
   getClubImage,
   getClubName,
-  getPartidosByIds,
   getTodosLosJugadores,
 } from '../torneo/torneo-utilities';
 import { MatDialogModule } from '@angular/material/dialog';

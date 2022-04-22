@@ -12,12 +12,10 @@ import { MatTableModule } from '@angular/material/table';
 import { Equipo, Jugador, Partido, Torneo } from 'src/models/torneo';
 import { MatIconModule } from '@angular/material/icon';
 import { FirebaseService } from '../firebase.service';
-import { map } from 'rxjs/operators';
 import {
   fieldSorter,
   getGoleadores,
   getJugador,
-  getJugadoresId,
   getTodosLosPartidos,
   obtainRedCards,
   obtainYellowCards,
@@ -30,7 +28,7 @@ import {
 })
 export class ClubesComponent implements OnChanges {
   constructor(private service: FirebaseService) {}
-  
+
   @Input()
   public torneos: Torneo[] = [];
 

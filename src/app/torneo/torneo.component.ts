@@ -12,7 +12,6 @@ import { TarjetasModule } from '../tarjetas/tarjetas.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TorneoService } from './torneo.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { Cancha, Equipo, Fecha, Jugador, Partido } from 'src/models/torneo';
 
 @Component({
   selector: 'app-torneo',
@@ -20,24 +19,9 @@ import { Cancha, Equipo, Fecha, Jugador, Partido } from 'src/models/torneo';
   styleUrls: ['./torneo.component.scss'],
 })
 export class TorneoComponent {
-  public jugadores$: Observable<Jugador[]>;
-
-  public partidos$: Observable<Partido[]>;
-
-  public canchas$: Observable<Cancha[]>;
-
-  public equipos$: Observable<Equipo[]>;
-
-  public fechas$: Observable<Fecha[]>;
-  
   public torneos$: Observable<any[]>;
 
   constructor(private service: TorneoService) {
-    this.canchas$ = this.service.canchas$;
-    this.fechas$ = this.service.fechas$;
-    this.equipos$ = this.service.equipos$;
-    this.partidos$ = this.service.partidos$;
-    this.jugadores$ = this.service.jugadores$;
     this.torneos$ = this.service.torneos$;
   }
 }
