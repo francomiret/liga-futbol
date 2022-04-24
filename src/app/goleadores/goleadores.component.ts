@@ -29,6 +29,8 @@ export class GoleadoresComponent implements OnChanges {
 
   public goleadores: Goleador[] = [];
 
+  public loading: boolean = true;
+
   public displayedColumns = ['jugador', 'goles'];
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -65,6 +67,7 @@ export class GoleadoresComponent implements OnChanges {
       this.goleadores = [...this.goleadores, goleador];
     });
     this.goleadores.sort(fieldSorter(['-goles']));
+    this.loading = false;
   }
 }
 

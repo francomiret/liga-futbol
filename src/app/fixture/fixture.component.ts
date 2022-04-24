@@ -41,6 +41,8 @@ export class FixtureComponent implements OnChanges {
   @Input()
   public torneos: Torneo[] = [];
 
+  public loading: boolean = true;
+
   public fechaActualId: number = 0;
 
   public fixture: Fixture[] = [];
@@ -79,6 +81,7 @@ export class FixtureComponent implements OnChanges {
     this.fixture.sort(fieldSorter(['id']));
     this.fechaActualId =
       Number(this.fixture.find((x) => x.jugada === false)?.id) - 1 ?? 1;
+    this.loading = false;
   }
 
   public getResultadoPartido(golesLocal: string[], golesVisitante: string[]) {

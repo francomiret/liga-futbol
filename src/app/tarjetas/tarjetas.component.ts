@@ -37,6 +37,8 @@ export class TarjetasComponent implements OnChanges {
 
   public tarjetas: Tarjetas[] = [];
 
+  public loading: boolean = true;
+
   public displayedColumns = ['jugador', 'ta', 'tr'];
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -72,6 +74,7 @@ export class TarjetasComponent implements OnChanges {
       this.tarjetas = [...this.tarjetas, jugador];
     });
     this.tarjetas.sort(fieldSorter(['-tr', '-ta']));
+    this.loading = false;
   }
 }
 

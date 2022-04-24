@@ -1,7 +1,21 @@
-mat-grid-tile{
-    height: 60px;
-    text-align: center;
+mat-grid-tile {
+  height: 60px;
+  text-align: center;
 }
-mat-grid-list{
-    height: 60px; 
+mat-grid-list {
+  height: 60px;
+}
+
+.loading-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+}
+
+.loading-svg {
+  width: 150px;
+  height: 150px;
 }

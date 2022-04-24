@@ -1,82 +1,88 @@
-<table class="example-container" mat-table [dataSource]="posiciones">
-  <ng-container matColumnDef="club" sticky>
-    <th class="club-container" mat-header-cell *matHeaderCellDef>Club</th>
-    <td
-      class="club-container"
-      mat-cell
-      *matCellDef="let element; let i = index"
-    >
-      <div class="club-content">
-        <div style="margin-right: 5px">{{ i + 1 }}</div>
-        <img
-          style="width: 30px; margin-right: 5px"
-          [src]="element.equipo.imagen"
-        />
-        {{ element.equipo.nombre }}
-      </div>
-    </td>
-  </ng-container>
+<ng-template #posicionesTemplate>
+  <table class="example-container" mat-table [dataSource]="posiciones">
+    <ng-container matColumnDef="club" sticky>
+      <th class="club-container" mat-header-cell *matHeaderCellDef>Club</th>
+      <td
+        class="club-container"
+        mat-cell
+        *matCellDef="let element; let i = index"
+      >
+        <div class="club-content">
+          <div style="margin-right: 5px">{{ i + 1 }}</div>
+          <img
+            style="width: 30px; margin-right: 5px"
+            [src]="element.equipo.imagen"
+          />
+          {{ element.equipo.nombre }}
+        </div>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="pj">
-    <th class="cells" mat-header-cell *matHeaderCellDef>PJ</th>
-    <td class="cells" mat-cell *matCellDef="let element">
-      {{ element.pj }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="pj">
+      <th class="cells" mat-header-cell *matHeaderCellDef>PJ</th>
+      <td class="cells" mat-cell *matCellDef="let element">
+        {{ element.pj }}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="gf">
-    <th class="cells" mat-header-cell *matHeaderCellDef>GF</th>
-    <td class="cells" mat-cell *matCellDef="let element">
-      {{ element.gf }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="gf">
+      <th class="cells" mat-header-cell *matHeaderCellDef>GF</th>
+      <td class="cells" mat-cell *matCellDef="let element">
+        {{ element.gf }}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="puntos">
-    <th class="cells" mat-header-cell *matHeaderCellDef>
-      <strong>Pts</strong>
-    </th>
-    <td class="cells" mat-cell *matCellDef="let element">
-      <strong>
-        {{ element.puntos }}
-      </strong>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="puntos">
+      <th class="cells" mat-header-cell *matHeaderCellDef>
+        <strong>Pts</strong>
+      </th>
+      <td class="cells" mat-cell *matCellDef="let element">
+        <strong>
+          {{ element.puntos }}
+        </strong>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="g">
-    <th class="cells" mat-header-cell *matHeaderCellDef>G</th>
-    <td class="cells" mat-cell *matCellDef="let element">
-      {{ element.g }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="g">
+      <th class="cells" mat-header-cell *matHeaderCellDef>G</th>
+      <td class="cells" mat-cell *matCellDef="let element">
+        {{ element.g }}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="e">
-    <th class="cells" mat-header-cell *matHeaderCellDef>E</th>
-    <td class="cells" mat-cell *matCellDef="let element">
-      {{ element.e }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="e">
+      <th class="cells" mat-header-cell *matHeaderCellDef>E</th>
+      <td class="cells" mat-cell *matCellDef="let element">
+        {{ element.e }}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="p">
-    <th class="cells" mat-header-cell *matHeaderCellDef>P</th>
-    <td class="cells" mat-cell *matCellDef="let element">
-      {{ element.p }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="p">
+      <th class="cells" mat-header-cell *matHeaderCellDef>P</th>
+      <td class="cells" mat-cell *matCellDef="let element">
+        {{ element.p }}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="gc">
-    <th class="cells" mat-header-cell *matHeaderCellDef>GC</th>
-    <td class="cells" mat-cell *matCellDef="let element">
-      {{ element.gc }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="gc">
+      <th class="cells" mat-header-cell *matHeaderCellDef>GC</th>
+      <td class="cells" mat-cell *matCellDef="let element">
+        {{ element.gc }}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="dg">
-    <th class="cells" mat-header-cell *matHeaderCellDef>DG</th>
-    <td class="cells" mat-cell *matCellDef="let element">
-      {{ element.dg }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="dg">
+      <th class="cells" mat-header-cell *matHeaderCellDef>DG</th>
+      <td class="cells" mat-cell *matCellDef="let element">
+        {{ element.dg }}
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</ng-template>
+
+<div *ngIf="loading; else posicionesTemplate" class="loading-container">
+  <img class="loading-svg" src="./assets/loading.svg" />
+</div>

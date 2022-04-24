@@ -1,49 +1,56 @@
-<mat-tab-group
-  [selectedIndex]="fechaActualId"
-  mat-align-tabs="center"
-  style="height: 100%"
->
-  <mat-tab *ngFor="let fecha of fixture">
-    <ng-template mat-tab-label> Fecha {{ fecha.id }} </ng-template>
-    <mat-card style="margin-bottom: 5px">
-      <mat-card-title>Fecha {{ fecha.id }} </mat-card-title>
-      <mat-card-subtitle>
-        <strong>{{ fecha.fecha }}</strong> | {{ fecha.clubOrganizadorNombre }} |
-        {{ fecha.canchaLocalidad }}
-      </mat-card-subtitle>
-      <mat-card-content>
-        <mat-grid-list
-          *ngFor="let partido of fecha.partidos"
-          cols="12"
-          (click)="partidoSeleccionado(partido, fecha)"
-          matRipple
-        >
-          <mat-grid-tile [colspan]="1">
-            <img style="width: 100%" [src]="partido.imagenLocal" />
-          </mat-grid-tile>
-          <mat-grid-tile [colspan]="4">
-            {{ partido.nombreLocal }}</mat-grid-tile
+<ng-template #fixtureTemplate>
+  <mat-tab-group
+    [selectedIndex]="fechaActualId"
+    mat-align-tabs="center"
+    style="height: 100%"
+  >
+    <mat-tab *ngFor="let fecha of fixture">
+      <ng-template mat-tab-label> Fecha {{ fecha.id }} </ng-template>
+      <mat-card style="margin-bottom: 5px">
+        <mat-card-title>Fecha {{ fecha.id }} </mat-card-title>
+        <mat-card-subtitle>
+          <strong>{{ fecha.fecha }}</strong> |
+          {{ fecha.clubOrganizadorNombre }} |
+          {{ fecha.canchaLocalidad }}
+        </mat-card-subtitle>
+        <mat-card-content>
+          <mat-grid-list
+            *ngFor="let partido of fecha.partidos"
+            cols="12"
+            (click)="partidoSeleccionado(partido, fecha)"
+            matRipple
           >
-          <mat-grid-tile [colspan]="2">
-            <strong *ngIf="partido.jugado; else horario">{{
-              getResultadoPartido(
-                partido.golesLocalId,
-                partido.golesVisitanteId
-              )
-            }}</strong>
-            <ng-template #horario>
-              <strong>{{ partido.horario }}</strong>
-            </ng-template>
-          </mat-grid-tile>
-          <mat-grid-tile [colspan]="4">
-            {{ partido.nombreVisitante }}</mat-grid-tile
-          >
-          <mat-grid-tile [colspan]="1">
-            <img style="width: 100%" [src]="partido.imagenVisitante" />
-          </mat-grid-tile>
-          <mat-divider></mat-divider>
-        </mat-grid-list>
-      </mat-card-content>
-    </mat-card>
-  </mat-tab>
-</mat-tab-group>
+            <mat-grid-tile [colspan]="1">
+              <img style="width: 100%" [src]="partido.imagenLocal" />
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="4">
+              {{ partido.nombreLocal }}</mat-grid-tile
+            >
+            <mat-grid-tile [colspan]="2">
+              <strong *ngIf="partido.jugado; else horario">{{
+                getResultadoPartido(
+                  partido.golesLocalId,
+                  partido.golesVisitanteId
+                )
+              }}</strong>
+              <ng-template #horario>
+                <strong>{{ partido.horario }}</strong>
+              </ng-template>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="4">
+              {{ partido.nombreVisitante }}</mat-grid-tile
+            >
+            <mat-grid-tile [colspan]="1">
+              <img style="width: 100%" [src]="partido.imagenVisitante" />
+            </mat-grid-tile>
+            <mat-divider></mat-divider>
+          </mat-grid-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+  </mat-tab-group>
+</ng-template>
+
+<div *ngIf="loading; else fixtureTemplate" class="loading-container">
+  <img class="loading-svg" src="./assets/loading.svg" />
+</div>

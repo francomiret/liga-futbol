@@ -1,31 +1,37 @@
-<table class="example-container" mat-table [dataSource]="tarjetas">
-  <ng-container matColumnDef="jugador" sticky>
-    <th class="club-container" mat-header-cell *matHeaderCellDef>Jugador</th>
-    <td
-      class="club-container"
-      mat-cell
-      *matCellDef="let element; let i = index"
+<ng-template #tarjetasTemplate>
+  <table class="example-container" mat-table [dataSource]="tarjetas">
+    <ng-container matColumnDef="jugador" sticky>
+      <th class="club-container" mat-header-cell *matHeaderCellDef>Jugador</th>
+      <td
+        class="club-container"
+        mat-cell
+        *matCellDef="let element; let i = index"
+      >
+        <div class="jugador-content">
+          <div style="margin-right: 5px">{{ i + 1 }}</div>
+          <img style="width: 30px; margin-right: 5px" [src]="element.imagen" />
+          {{ element.jugador }}
+        </div>
+      </td></ng-container
     >
-      <div class="jugador-content">
-        <div style="margin-right: 5px">{{ i + 1 }}</div>
-        <img style="width: 30px; margin-right: 5px" [src]="element.imagen" />
-        {{ element.jugador }}
-      </div>
-    </td></ng-container
-  >
-  <ng-container matColumnDef="ta">
-    <th class="cells" mat-header-cell *matHeaderCellDef>TA</th>
-    <td class="cells" mat-cell *matCellDef="let element">
-      {{ element.ta }}
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="tr">
-    <th class="cells" mat-header-cell *matHeaderCellDef>TR</th>
-    <td class="cells" mat-cell *matCellDef="let element">
-      {{ element.tr }}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="ta">
+      <th class="cells" mat-header-cell *matHeaderCellDef>TA</th>
+      <td class="cells" mat-cell *matCellDef="let element">
+        {{ element.ta }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="tr">
+      <th class="cells" mat-header-cell *matHeaderCellDef>TR</th>
+      <td class="cells" mat-cell *matCellDef="let element">
+        {{ element.tr }}
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</ng-template>
+
+<div *ngIf="loading; else tarjetasTemplate" class="loading-container">
+  <img class="loading-svg" src="./assets/loading.svg" />
+</div>

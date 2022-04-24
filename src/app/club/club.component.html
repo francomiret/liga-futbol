@@ -1,48 +1,56 @@
-<mat-expansion-panel
-  *ngFor="let club of clubes"
-  style="margin: 10px"
-  (opened)="panelOpenState = true"
-  (closed)="panelOpenState = false"
->
-  <mat-expansion-panel-header>
-    <div class="club-content">
-      <img style="width: 30px; margin-right: 5px" [src]="club.imagen" />
-      <mat-panel-title>
-        {{ club.nombre }}
-      </mat-panel-title>
-    </div>
-  </mat-expansion-panel-header>
-  <table class="example-container" mat-table [dataSource]="club.jugadores">
-    <ng-container matColumnDef="jugador" sticky>
-      <th class="club-container" mat-header-cell *matHeaderCellDef>Jugador</th>
-      <td
-        class="club-container"
-        mat-cell
-        *matCellDef="let element; let i = index"
+<ng-template #clubesTemplate>
+  <mat-expansion-panel
+    *ngFor="let club of clubes"
+    style="margin: 10px"
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <div class="club-content">
+        <img style="width: 30px; margin-right: 5px" [src]="club.imagen" />
+        <mat-panel-title>
+          {{ club.nombre }}
+        </mat-panel-title>
+      </div>
+    </mat-expansion-panel-header>
+    <table class="example-container" mat-table [dataSource]="club.jugadores">
+      <ng-container matColumnDef="jugador" sticky>
+        <th class="club-container" mat-header-cell *matHeaderCellDef>
+          Jugador
+        </th>
+        <td
+          class="club-container"
+          mat-cell
+          *matCellDef="let element; let i = index"
+        >
+          {{ element.nombre }}
+        </td></ng-container
       >
-        {{ element.nombre }}
-      </td></ng-container
-    >
-    <ng-container matColumnDef="goles">
-      <th class="cells" mat-header-cell *matHeaderCellDef>Goles</th>
-      <td class="cells" mat-cell *matCellDef="let element">
-        {{ element.goles }}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="ta">
-      <th class="cells" mat-header-cell *matHeaderCellDef>TA</th>
-      <td class="cells" mat-cell *matCellDef="let element">
-        {{ element.ta }}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="tr">
-      <th class="cells" mat-header-cell *matHeaderCellDef>TR</th>
-      <td class="cells" mat-cell *matCellDef="let element">
-        {{ element.tr }}
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="goles">
+        <th class="cells" mat-header-cell *matHeaderCellDef>Goles</th>
+        <td class="cells" mat-cell *matCellDef="let element">
+          {{ element.goles }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="ta">
+        <th class="cells" mat-header-cell *matHeaderCellDef>TA</th>
+        <td class="cells" mat-cell *matCellDef="let element">
+          {{ element.ta }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="tr">
+        <th class="cells" mat-header-cell *matHeaderCellDef>TR</th>
+        <td class="cells" mat-cell *matCellDef="let element">
+          {{ element.tr }}
+        </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-</mat-expansion-panel>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-expansion-panel>
+</ng-template>
+
+<div *ngIf="loading; else clubesTemplate" class="loading-container">
+  <img class="loading-svg" src="./assets/loading.svg" />
+</div>

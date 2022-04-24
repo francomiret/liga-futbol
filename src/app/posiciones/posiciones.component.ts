@@ -39,6 +39,8 @@ export class PosicionesComponent implements OnChanges {
   @Input()
   public torneos: Torneo[] = [];
 
+  public loading: boolean = true;
+
   public posiciones: Posicion[] = [];
   public displayedColumns = [
     'club',
@@ -129,6 +131,7 @@ export class PosicionesComponent implements OnChanges {
       this.posiciones = [...this.posiciones, posicion];
     });
     this.posiciones.sort(fieldSorter(['-puntos', '-dg']));
+    this.loading = false;
   }
 }
 

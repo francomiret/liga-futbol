@@ -34,6 +34,8 @@ export class ClubesComponent implements OnChanges {
 
   public clubes: Equipo[] = [];
 
+  public loading: boolean = true;
+
   public panelOpenState = false;
 
   public displayedColumns = ['jugador', 'goles', 'ta', 'tr'];
@@ -65,6 +67,7 @@ export class ClubesComponent implements OnChanges {
       equipo = { ...equipo, jugadores };
       this.clubes.push(equipo);
       this.clubes.sort(fieldSorter(['nombre']));
+      this.loading = false;
     });
   }
 }

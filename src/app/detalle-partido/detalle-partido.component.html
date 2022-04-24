@@ -1,91 +1,94 @@
-<mat-card-content style="max-height: 550px">
-  <mat-grid-list cols="12">
-    <mat-grid-tile [colspan]="4">
-      <div style="flex-direction: column; display: flex">
-        <img style="width: 100%" [src]="data.partido.imagenLocal" />
-        {{ data.partido.nombreLocal }}
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="4">
-      <h1>
-        <strong>
-          {{
-            getResultadoPartido(
-              data.partido.golesLocalId,
-              data.partido.golesVisitanteId
-            )
-          }}
-        </strong>
-      </h1>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="4">
-      <div style="flex-direction: column">
-        <img style="width: 100%" [src]="data.partido.imagenVisitante" />
-        {{ data.partido.nombreVisitante }}
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
-</mat-card-content>
-<mat-card-subtitle
-  style="display: flex; justify-content: center; text-align: center"
->
-  Fecha {{ data.fecha.id }} | {{ data.fecha.fecha }} |
-  {{ data.partido.horario }}| {{ data.fecha.canchaLocalidad }}
-</mat-card-subtitle>
-<mat-card-content style="width: 100%; display: flex">
-  <div
-    style="
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    "
+<div>
+  <mat-card-content style="max-height: 500px">
+    <mat-grid-list cols="12">
+      <mat-grid-tile [colspan]="4">
+        <div style="flex-direction: column; display: flex">
+          <img style="width: 100%" [src]="data.partido.imagenLocal" />
+          {{ data.partido.nombreLocal }}
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="4">
+        <h1>
+          <strong>
+            {{
+              getResultadoPartido(
+                data.partido.golesLocalId,
+                data.partido.golesVisitanteId
+              )
+            }}
+          </strong>
+        </h1>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="4">
+        <div style="flex-direction: column">
+          <img style="width: 100%" [src]="data.partido.imagenVisitante" />
+          {{ data.partido.nombreVisitante }}
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+  <mat-card-subtitle
+    style="display: flex; justify-content: center; text-align: center"
   >
-    <mat-list *ngFor="let item of data.partido.golesLocalId">
-      <mat-list-item>
-        <mat-icon style="margin-right: 5px">sports_soccer</mat-icon
-        >{{ getJugadorName(item) }}
-      </mat-list-item>
-    </mat-list>
-    <mat-list *ngFor="let item of data.partido.amarillasLocalId">
-      <mat-list-item>
-        <div class="yellow-card"></div>
-        {{ getJugadorName(item) }}
-      </mat-list-item>
-    </mat-list>
-    <mat-list *ngFor="let item of data.partido.rojasLocalId">
-      <mat-list-item>
-        <div class="red-card"></div>
-        {{ getJugadorName(item) }}</mat-list-item
-      >
-    </mat-list>
-  </div>
-  <mat-divider [vertical]="true"></mat-divider>
-  <div
-    style="
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    "
-  >
-    <mat-list *ngFor="let item of data.partido.golesVisitanteId">
-      <mat-list-item>
-        <mat-icon style="margin-right: 5px">sports_soccer</mat-icon>
-        {{ getJugadorName(item) }}
-      </mat-list-item>
-    </mat-list>
-    <mat-list *ngFor="let item of data.partido.amarillasVisitanteId">
-      <mat-list-item>
-        <div class="yellow-card"></div>
-        {{ getJugadorName(item) }}
-      </mat-list-item>
-    </mat-list>
-    <mat-list *ngFor="let item of data.partido.rojasVisitanteId">
-      <mat-list-item>
-        <div class="red-card"></div>
-        {{ getJugadorName(item) }}</mat-list-item
-      >
-    </mat-list>
-  </div>
-</mat-card-content>
+    Fecha {{ data.fecha.id }} | {{ data.fecha.canchaLocalidad }} |
+    {{ data.fecha.fecha }} |
+    {{ data.partido.horario }}
+  </mat-card-subtitle>
+  <mat-card-content style="width: 100%; display: flex">
+    <div
+      style="
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      "
+    >
+      <mat-list *ngFor="let item of data.partido.golesLocalId">
+        <mat-list-item>
+          <mat-icon style="margin-right: 5px">sports_soccer</mat-icon
+          >{{ getJugadorName(item) }}
+        </mat-list-item>
+      </mat-list>
+      <mat-list *ngFor="let item of data.partido.amarillasLocalId">
+        <mat-list-item>
+          <div class="yellow-card"></div>
+          {{ getJugadorName(item) }}
+        </mat-list-item>
+      </mat-list>
+      <mat-list *ngFor="let item of data.partido.rojasLocalId">
+        <mat-list-item>
+          <div class="red-card"></div>
+          {{ getJugadorName(item) }}</mat-list-item
+        >
+      </mat-list>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div
+      style="
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      "
+    >
+      <mat-list *ngFor="let item of data.partido.golesVisitanteId">
+        <mat-list-item>
+          <mat-icon style="margin-right: 5px">sports_soccer</mat-icon>
+          {{ getJugadorName(item) }}
+        </mat-list-item>
+      </mat-list>
+      <mat-list *ngFor="let item of data.partido.amarillasVisitanteId">
+        <mat-list-item>
+          <div class="yellow-card"></div>
+          {{ getJugadorName(item) }}
+        </mat-list-item>
+      </mat-list>
+      <mat-list *ngFor="let item of data.partido.rojasVisitanteId">
+        <mat-list-item>
+          <div class="red-card"></div>
+          {{ getJugadorName(item) }}</mat-list-item
+        >
+      </mat-list>
+    </div>
+  </mat-card-content>
+</div>
