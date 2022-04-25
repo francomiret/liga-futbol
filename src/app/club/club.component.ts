@@ -11,6 +11,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { Equipo, Jugador, Partido, Torneo } from 'src/models/torneo';
 import { MatIconModule } from '@angular/material/icon';
+import {MatSort} from '@angular/material/sort';
 import { FirebaseService } from '../firebase.service';
 import {
   fieldSorter,

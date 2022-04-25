@@ -1,21 +1,31 @@
 <ng-template #clubesTemplate>
   <mat-expansion-panel
     *ngFor="let club of clubes"
-    style="margin: 10px"
+    class="acordeon-conteiner"
     (opened)="panelOpenState = true"
     (closed)="panelOpenState = false"
   >
     <mat-expansion-panel-header>
       <div class="club-content">
-        <img style="width: 30px; margin-right: 5px" [src]="club.imagen" />
+        <img class="imagen" [src]="club.imagen" />
         <mat-panel-title>
           {{ club.nombre }}
         </mat-panel-title>
       </div>
     </mat-expansion-panel-header>
-    <table class="example-container" mat-table [dataSource]="club.jugadores">
+    <table
+      class="example-container"
+      mat-table
+      [dataSource]="club.jugadores"
+      matSort
+    >
       <ng-container matColumnDef="jugador" sticky>
-        <th class="club-container" mat-header-cell *matHeaderCellDef>
+        <th
+          class="club-container"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
           Jugador
         </th>
         <td
@@ -27,19 +37,25 @@
         </td></ng-container
       >
       <ng-container matColumnDef="goles">
-        <th class="cells" mat-header-cell *matHeaderCellDef>Goles</th>
+        <th class="cells" mat-header-cell *matHeaderCellDef mat-sort-header>
+          Goles
+        </th>
         <td class="cells" mat-cell *matCellDef="let element">
           {{ element.goles }}
         </td>
       </ng-container>
       <ng-container matColumnDef="ta">
-        <th class="cells" mat-header-cell *matHeaderCellDef>TA</th>
+        <th class="cells" mat-header-cell *matHeaderCellDef mat-sort-header>
+          TA
+        </th>
         <td class="cells" mat-cell *matCellDef="let element">
           {{ element.ta }}
         </td>
       </ng-container>
       <ng-container matColumnDef="tr">
-        <th class="cells" mat-header-cell *matHeaderCellDef>TR</th>
+        <th class="cells" mat-header-cell *matHeaderCellDef mat-sort-header>
+          TR
+        </th>
         <td class="cells" mat-cell *matCellDef="let element">
           {{ element.tr }}
         </td>

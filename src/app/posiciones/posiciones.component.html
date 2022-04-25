@@ -8,11 +8,8 @@
         *matCellDef="let element; let i = index"
       >
         <div class="club-content">
-          <div style="margin-right: 5px">{{ i + 1 }}</div>
-          <img
-            style="width: 30px; margin-right: 5px"
-            [src]="element.equipo.imagen"
-          />
+          <div class="indice">{{ i + 1 }}</div>
+          <img class="imagen" [src]="element.equipo.imagen" />
           {{ element.equipo.nombre }}
         </div>
       </td>

@@ -25,6 +25,7 @@ td.mat-column-goles {
   padding-left: 8px;
   text-align: center;
 }
+
 .loading-container {
   height: 100%;
   width: 100%;
@@ -33,7 +34,17 @@ td.mat-column-goles {
   align-items: center;
   position: fixed;
 }
+
 .loading-svg {
   width: 150px;
   height: 150px;
+}
+
+.imagen {
+  width: 30px;
+  margin-right: 5px;
+}
+
+.indice {
+  margin-right: 5px;
 }

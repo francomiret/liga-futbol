@@ -9,7 +9,10 @@
   </button>
   La liga de las colonias
 </mat-toolbar>
-<mat-sidenav-container style="height: 100%">
+<div class="small-content">
+  <small>Sitio no oficial de La liga de las Colonias</small>
+</div>
+<mat-sidenav-container class="sidenav-content">
   <mat-sidenav #sidenav mode="over">
     <mat-selection-list [multiple]="false">
       <mat-list-option [routerLink]="['/torneo']">

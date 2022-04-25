@@ -8,8 +8,8 @@
         *matCellDef="let element; let i = index"
       >
         <div class="jugador-content">
-          <div style="margin-right: 5px">{{ i + 1 }}</div>
-          <img style="width: 30px; margin-right: 5px" [src]="element.imagen" />
+          <div class="indice">{{ i + 1 }}</div>
+          <img class="imagen" [src]="element.imagen" />
           {{ element.jugador }}
         </div>
       </td></ng-container

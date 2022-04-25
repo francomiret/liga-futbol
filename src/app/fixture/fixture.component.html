@@ -2,11 +2,11 @@
   <mat-tab-group
     [selectedIndex]="fechaActualId"
     mat-align-tabs="center"
-    style="height: 100%"
+    class="tabs-group-content"
   >
     <mat-tab *ngFor="let fecha of fixture">
       <ng-template mat-tab-label> Fecha {{ fecha.id }} </ng-template>
-      <mat-card style="margin-bottom: 5px">
+      <mat-card class="card-container">
         <mat-card-title>Fecha {{ fecha.id }} </mat-card-title>
         <mat-card-subtitle>
           <strong>{{ fecha.fecha }}</strong> |
@@ -21,7 +21,7 @@
             matRipple
           >
             <mat-grid-tile [colspan]="1">
-              <img style="width: 100%" [src]="partido.imagenLocal" />
+              <img class="imagen" [src]="partido.imagenLocal" />
             </mat-grid-tile>
             <mat-grid-tile [colspan]="4">
               {{ partido.nombreLocal }}</mat-grid-tile
@@ -41,7 +41,7 @@
               {{ partido.nombreVisitante }}</mat-grid-tile
             >
             <mat-grid-tile [colspan]="1">
-              <img style="width: 100%" [src]="partido.imagenVisitante" />
+              <img class="imagen" [src]="partido.imagenVisitante" />
             </mat-grid-tile>
             <mat-divider></mat-divider>
           </mat-grid-list>
