@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { Equipo, Jugador, Partido, Torneo } from 'src/models/torneo';
+import { LoadingModule } from '../loading/loading.component';
 import {
   fieldSorter,
   getEquipoJugador,
@@ -83,6 +84,6 @@ const matModules = [MatTableModule];
 @NgModule({
   declarations: [TarjetasComponent],
   exports: [TarjetasComponent],
-  imports: [CommonModule, matModules],
+  imports: [CommonModule, matModules, LoadingModule],
 })
 export class TarjetasModule {}

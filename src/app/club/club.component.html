@@ -67,6 +67,6 @@
   </mat-expansion-panel>
 </ng-template>
 
-<div *ngIf="loading; else clubesTemplate" class="loading-container">
-  <img class="loading-svg" src="./assets/loading.svg" />
+<div *ngIf="loading; else clubesTemplate">
+  <app-loading> </app-loading>
 </div>

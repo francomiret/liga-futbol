@@ -20,6 +20,7 @@ import {
   getPuntos,
   getTodosLosPartidos,
 } from '../torneo/torneo-utilities';
+import { LoadingModule } from '../loading/loading.component';
 
 @Component({
   selector: 'app-posiciones',
@@ -145,6 +146,6 @@ const matModules = [
 @NgModule({
   declarations: [PosicionesComponent],
   exports: [PosicionesComponent],
-  imports: [CommonModule, matModules],
+  imports: [CommonModule, matModules, LoadingModule],
 })
 export class PosicionesModule {}

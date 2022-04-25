@@ -51,6 +51,6 @@
   </mat-tab-group>
 </ng-template>
 
-<div *ngIf="loading; else fixtureTemplate" class="loading-container">
-  <img class="loading-svg" src="./assets/loading.svg" />
+<div *ngIf="loading; else fixtureTemplate">
+  <app-loading> </app-loading>
 </div>

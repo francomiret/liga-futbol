@@ -80,6 +80,6 @@
   </table>
 </ng-template>
 
-<div *ngIf="loading; else posicionesTemplate" class="loading-container">
-  <img class="loading-svg" src="./assets/loading.svg" />
+<div *ngIf="loading; else posicionesTemplate">
+  <app-loading> </app-loading>
 </div>

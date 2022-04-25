@@ -30,6 +30,7 @@ import {
 } from '../torneo/torneo-utilities';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRippleModule } from '@angular/material/core';
+import { LoadingModule } from '../loading/loading.component';
 
 @Component({
   selector: 'app-fixture',
@@ -113,6 +114,6 @@ const matModules = [
 @NgModule({
   declarations: [FixtureComponent],
   exports: [FixtureComponent],
-  imports: [CommonModule, matModules],
+  imports: [CommonModule, matModules, LoadingModule],
 })
 export class FixtureModule {}

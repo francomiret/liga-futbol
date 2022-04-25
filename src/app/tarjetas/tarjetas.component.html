@@ -32,6 +32,6 @@
   </table>
 </ng-template>
 
-<div *ngIf="loading; else tarjetasTemplate" class="loading-container">
-  <img class="loading-svg" src="./assets/loading.svg" />
+<div *ngIf="loading; else tarjetasTemplate">
+  <app-loading> </app-loading>
 </div>

@@ -11,7 +11,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { Equipo, Jugador, Partido, Torneo } from 'src/models/torneo';
 import { MatIconModule } from '@angular/material/icon';
-import {MatSort} from '@angular/material/sort';
 import { FirebaseService } from '../firebase.service';
 import {
   fieldSorter,
@@ -21,6 +20,7 @@ import {
   obtainRedCards,
   obtainYellowCards,
 } from '../torneo/torneo-utilities';
+import { LoadingModule } from '../loading/loading.component';
 
 @Component({
   selector: 'app-club',
@@ -28,8 +28,6 @@ import {
   styleUrls: ['./club.component.scss'],
 })
 export class ClubesComponent implements OnChanges {
-  constructor(private service: FirebaseService) {}
-
   @Input()
   public torneos: Torneo[] = [];
 
@@ -83,6 +81,6 @@ const materialModules = [
 @NgModule({
   declarations: [ClubesComponent],
   exports: [ClubesComponent],
-  imports: [CommonModule, materialModules],
+  imports: [CommonModule, materialModules, LoadingModule],
 })
 export class ClubModule {}
