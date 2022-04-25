@@ -140,6 +140,9 @@ Apache-2.0
 @firebase/webchannel-wrapper
 Apache-2.0
 
+angular-google-tag-manager
+MIT
+
 firebase/analytics
 
 firebase/app
