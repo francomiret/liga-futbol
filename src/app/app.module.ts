@@ -25,6 +25,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FirebaseService } from './firebase.service';
 import { MatDialog } from '@angular/material/dialog';
+import { GoogleTagManagerModule } from 'angular-google-tag-manager';
 
 const matModules = [
   MatToolbarModule,
@@ -40,6 +41,9 @@ const matModules = [
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    GoogleTagManagerModule.forRoot({
+      id: 'GTM-K5V4FJV',
+    }),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
