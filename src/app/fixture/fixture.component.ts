@@ -92,6 +92,7 @@ export class FixtureComponent implements OnChanges {
   public partidoSeleccionado(partido: PartidoFixture, fecha: Fixture) {
     if (partido.jugado) {
       this.dialog.open(DetallePartidoComponent, {
+        panelClass: 'custom-dialog-container',
         data: {
           partido,
           jugadores: getTodosLosJugadores(this.torneos[0].equipos),
