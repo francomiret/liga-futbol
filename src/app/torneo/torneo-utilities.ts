@@ -12,8 +12,12 @@ export function getGoleadores(partidos: Partido[]) {
   let repetidos: Record<string, number> = {};
 
   partidos.forEach((partido) => {
-    allGoleadores.push(...partido.golesLocalId);
-    allGoleadores.push(...partido.golesVisitanteId);
+    partido.golesLocalId.forEach((jugador) =>
+      allGoleadores.push(jugador + '.' + partido.equipoLocalId)
+    );
+    partido.golesVisitanteId.forEach((jugador) =>
+      allGoleadores.push(jugador + '.' + partido.equipoVisitanteId)
+    );
   });
 
   allGoleadores.forEach(function (numero) {
@@ -27,8 +31,12 @@ export function obtainRedCards(partidos: Partido[]) {
   let repetidos: Record<string, number> = {};
 
   partidos.forEach((partido) => {
-    allRedCards.push(...partido.rojasLocalId);
-    allRedCards.push(...partido.rojasVisitanteId);
+    partido.rojasLocalId.forEach((jugador) =>
+      allRedCards.push(jugador + '.' + partido.equipoLocalId)
+    );
+    partido.rojasVisitanteId.forEach((jugador) =>
+      allRedCards.push(jugador + '.' + partido.equipoVisitanteId)
+    );
   });
   allRedCards.forEach(function (numero) {
     repetidos[numero] = (repetidos[numero] || 0) + 1;
@@ -36,13 +44,24 @@ export function obtainRedCards(partidos: Partido[]) {
   return repetidos;
 }
 
+export function getJugadorIdFormComplexId(id: string) {
+  return id.split('.')[0];
+}
+export function getEquipoIdFormComplexId(id: string) {
+  return id.split('.')[1];
+}
+
 export function obtainYellowCards(partidos: Partido[]) {
   const allYellowCards: string[] = [];
   let repetidos: Record<string, number> = {};
 
   partidos.forEach((partido) => {
-    allYellowCards.push(...partido.amarillasLocalId);
-    allYellowCards.push(...partido.amarillasVisitanteId);
+    partido.amarillasLocalId.forEach((jugador) =>
+      allYellowCards.push(jugador + '.' + partido.equipoLocalId)
+    );
+    partido.amarillasVisitanteId.forEach((jugador) =>
+      allYellowCards.push(jugador + '.' + partido.equipoVisitanteId)
+    );
   });
   allYellowCards.forEach(function (numero) {
     repetidos[numero] = (repetidos[numero] || 0) + 1;
@@ -56,12 +75,21 @@ export function getJugadoresId(equipoId: string, jugadores: Jugador[]) {
   );
 }
 
-export function getJugador(id: string, jugadores: Jugador[]) {
-  return jugadores.find((x) => x.id === id) ?? jugadores[0];
+export function getJugador(id: string, jugadores: Jugador[], equipoId: string) {
+  return (
+    jugadores.find((x) => x.id === id && x.equipoId === equipoId) ??
+    jugadores[0]
+  );
 }
 
-export function getJugadorName(id: string, jugadores: Jugador[]) {
-  return jugadores.find((x) => x.id === id)?.nombre ?? '';
+export function getJugadorName(
+  id: string,
+  jugadores: Jugador[],
+  equipoId: string
+) {
+  return (
+    jugadores.find((x) => x.id === id && x.equipoId === equipoId)?.nombre ?? ''
+  );
 }
 
 export function getEquipoJugador(

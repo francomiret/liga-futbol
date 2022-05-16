@@ -11,8 +11,10 @@ import { Equipo, Jugador, Partido, Torneo } from 'src/models/torneo';
 import { LoadingModule } from '../loading/loading.component';
 import {
   fieldSorter,
+  getEquipoIdFormComplexId,
   getEquipoJugador,
   getImagenEquipoJugador,
+  getJugadorIdFormComplexId,
   getJugadorName,
   getTodosLosJugadores,
   getTodosLosPartidos,
@@ -64,13 +66,17 @@ export class TarjetasComponent implements OnChanges {
       ]),
     ];
     jugadoresId.forEach((x, i) => {
-      let jugadorId = jugadoresId[i];
+      let id = jugadoresId[i];
       const jugador: Tarjetas = {
-        jugador: getJugadorName(jugadorId, jugadores),
-        club: getEquipoJugador(jugadorId, equipos, jugadores),
-        imagen: getImagenEquipoJugador(jugadorId, equipos, jugadores),
-        ta: obtainYellowCards(partidos)[jugadorId] ?? 0,
-        tr: obtainRedCards(partidos)[jugadorId] ?? 0,
+        jugador: getJugadorName(
+          getJugadorIdFormComplexId(id),
+          jugadores,
+          getEquipoIdFormComplexId(id)
+        ),
+        club: getEquipoJugador(getJugadorIdFormComplexId(id), equipos, jugadores),
+        imagen: getImagenEquipoJugador(getJugadorIdFormComplexId(id), equipos, jugadores),
+        ta: obtainYellowCards(partidos)[id] ?? 0,
+        tr: obtainRedCards(partidos)[id] ?? 0,
       };
       this.tarjetas = [...this.tarjetas, jugador];
     });

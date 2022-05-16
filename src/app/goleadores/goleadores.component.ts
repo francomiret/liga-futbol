@@ -11,9 +11,11 @@ import { Equipo, Goleador, Jugador, Partido, Torneo } from 'src/models/torneo';
 import { LoadingModule } from '../loading/loading.component';
 import {
   fieldSorter,
+  getEquipoIdFormComplexId,
   getEquipoJugador,
   getGoleadores,
   getImagenEquipoJugador,
+  getJugadorIdFormComplexId,
   getJugadorName,
   getTodosLosJugadores,
   getTodosLosPartidos,
@@ -58,12 +60,12 @@ export class GoleadoresComponent implements OnChanges {
     };
 
     goleadoresId.forEach((x, i) => {
-      let jugadorId = goleadoresId[i];
+      let id = goleadoresId[i];
       goleador = {
-        jugador: getJugadorName(jugadorId, jugadores),
-        club: getEquipoJugador(jugadorId, equipos, jugadores),
-        imagen: getImagenEquipoJugador(jugadorId, equipos, jugadores),
-        goles: getGoleadores(partidos)[jugadorId],
+        jugador: getJugadorName(getJugadorIdFormComplexId(id), jugadores,getEquipoIdFormComplexId(id)),
+        club: getEquipoJugador(getJugadorIdFormComplexId(id), equipos, jugadores),
+        imagen: getImagenEquipoJugador(getJugadorIdFormComplexId(id), equipos, jugadores),
+        goles: getGoleadores(partidos)[id],
       };
       this.goleadores = [...this.goleadores, goleador];
     });

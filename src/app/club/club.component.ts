@@ -55,10 +55,10 @@ export class ClubesComponent implements OnChanges {
       for (let i = 0; i < jugadoresId.length; i++) {
         let jugadorId = jugadoresId[i];
         const jugador: Jugador = {
-          ...getJugador(jugadorId, equipo.jugadores),
-          goles: getGoleadores(partidos)[jugadorId] ?? 0,
-          ta: obtainYellowCards(partidos)[jugadorId] ?? 0,
-          tr: obtainRedCards(partidos)[jugadorId] ?? 0,
+          ...getJugador(jugadorId, equipo.jugadores, equipo.id),
+          goles: getGoleadores(partidos)[jugadorId + '.' + equipo.id] ?? 0,
+          ta: obtainYellowCards(partidos)[jugadorId + '.' + equipo.id] ?? 0,
+          tr: obtainRedCards(partidos)[jugadorId + '.' + equipo.id] ?? 0,
         };
         jugadores.push(jugador);
         jugadores.sort(fieldSorter(['nombre']));

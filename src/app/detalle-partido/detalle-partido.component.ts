@@ -28,8 +28,8 @@ export class DetallePartidoComponent {
     return `${golesLocal.length} - ${golesVisitante.length}`;
   }
 
-  public getJugadorName(id: string) {
-    return getJugadorName(id, this.data.jugadores);
+  public getJugadorName(id: string, equipoId: string) {
+    return getJugadorName(id, this.data.jugadores, equipoId);
   }
 }
 const matModules = [

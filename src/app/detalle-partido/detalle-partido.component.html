@@ -37,19 +37,19 @@
       <mat-list *ngFor="let item of data.partido.golesLocalId">
         <mat-list-item>
           <mat-icon class="icono">sports_soccer</mat-icon
-          >{{ getJugadorName(item) }}
+          >{{ getJugadorName(item, data.partido.equipoLocalId) }}
         </mat-list-item>
       </mat-list>
       <mat-list *ngFor="let item of data.partido.amarillasLocalId">
         <mat-list-item>
           <div class="yellow-card"></div>
-          {{ getJugadorName(item) }}
+          {{ getJugadorName(item, data.partido.equipoLocalId) }}
         </mat-list-item>
       </mat-list>
       <mat-list *ngFor="let item of data.partido.rojasLocalId">
         <mat-list-item>
           <div class="red-card"></div>
-          {{ getJugadorName(item) }}</mat-list-item
+          {{ getJugadorName(item, data.partido.equipoLocalId) }}</mat-list-item
         >
       </mat-list>
     </div>
@@ -59,20 +59,22 @@
         <mat-list-item>
           <mat-icon class="icono">sports_soccer</mat-icon>
           <span>
-            {{ getJugadorName(item) }}
+            {{ getJugadorName(item, data.partido.equipoVisitanteId) }}
           </span>
         </mat-list-item>
       </mat-list>
       <mat-list *ngFor="let item of data.partido.amarillasVisitanteId">
         <mat-list-item>
           <div class="yellow-card"></div>
-          {{ getJugadorName(item) }}
+          {{ getJugadorName(item, data.partido.equipoVisitanteId) }}
         </mat-list-item>
       </mat-list>
       <mat-list *ngFor="let item of data.partido.rojasVisitanteId">
         <mat-list-item>
           <div class="red-card"></div>
-          {{ getJugadorName(item) }}</mat-list-item
+          {{
+            getJugadorName(item, data.partido.equipoVisitanteId)
+          }}</mat-list-item
         >
       </mat-list>
     </div>
