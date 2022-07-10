@@ -32,10 +32,10 @@ export function obtainRedCards(partidos: Partido[]) {
 
   partidos.forEach((partido) => {
     partido.rojasLocalId.forEach((jugador) =>
-      allRedCards.push(jugador + '.' + partido.equipoLocalId)
+      allRedCards.push(jugador.jugadorId + '.' + partido.equipoLocalId)
     );
     partido.rojasVisitanteId.forEach((jugador) =>
-      allRedCards.push(jugador + '.' + partido.equipoVisitanteId)
+      allRedCards.push(jugador.jugadorId + '.' + partido.equipoVisitanteId)
     );
   });
   allRedCards.forEach(function (numero) {

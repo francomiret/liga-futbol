@@ -25,10 +25,14 @@ export interface Partido {
   golesVisitanteId: string[];
   amarillasLocalId: string[];
   amarillasVisitanteId: string[];
-  rojasLocalId: string[];
-  rojasVisitanteId: string[];
+  rojasLocalId: Roja[];
+  rojasVisitanteId: Roja[];
 }
 
+export interface Roja {
+  jugadorId: string;
+  fechas: number;
+}
 export interface Equipo {
   id: string;
   nombre: string;
