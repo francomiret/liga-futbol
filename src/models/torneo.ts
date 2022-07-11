@@ -31,7 +31,7 @@ export interface Partido {
 
 export interface Roja {
   jugadorId: string;
-  fechas: number;
+  fechas: number[];
 }
 export interface Equipo {
   id: string;
